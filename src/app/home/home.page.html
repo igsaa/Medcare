@@ -1,20 +1,34 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" style="text-align:center">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+	<div class="cont">
+    <div class="div-logo">
+      <img src="assets/Vector.svg" class="logo">
+    </div>
+
+    <div class="div-nombre">
+      <ion-text color="light" class="ion-text-center">
+        <h1 style="font-size:40px">MedCare</h1>
+      </ion-text>
+    </div>
+
+
+
+    <ion-item class="form-login" color="dark">
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <ion-item class="form-login" color="dark">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+    <div>
+      <ion-button routerLink="/start" class="btn-login"  shape="round" size="default">Entrar</ion-button>
+    </div>
+
+</div>
+
+
 </ion-content>

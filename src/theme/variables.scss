@@ -233,4 +233,7 @@
 
     --ion-card-background: #1e1e1e;
   }
+  ion-content{
+    --background: linear-gradient(146deg, rgba(255,255,255,1) 49%, rgba(3,226,201,1) 100%) !important;
+}
 }

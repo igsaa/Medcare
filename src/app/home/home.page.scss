@@ -25,3 +25,31 @@
 #container a {
   text-decoration: none;
 }
+
+.div-logo{
+  justify-content: center;
+  display: flex;
+}
+
+.cont{
+  height: 100%;
+  padding-top: 50%;
+  /*display: flex;
+  justify-content: center;
+  flex-direction: column;*/
+
+}
+
+.form-login{
+  padding: 0 30px 10px 30px;
+
+  --border-radius: 30px;
+  --border-width: 1px;
+  --box-shadow: 2px gray;
+
+
+}
+
+
+
+
