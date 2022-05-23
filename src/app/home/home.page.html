@@ -16,16 +16,16 @@
 
     <ion-item class="form-login" color="light">
       <ion-label position="floating">Usuario</ion-label>
-      <ion-input></ion-input>
+      <ion-input [(ngModel)]="user"></ion-input>
     </ion-item>
 
     <ion-item class="form-login" color="light">
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="pass"></ion-input>
     </ion-item>
 
     <div>
-      <ion-button routerLink="/start" class="btn-login"  shape="round" size="default">Entrar</ion-button>
+      <ion-button (click)="addData(getElementbyid)" class="btn-login"  shape="round" size="default">Entrar</ion-button>
     </div>
 
 </div>
