@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-start',
   templateUrl: './start.page.html',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartPage implements OnInit {
 
+  today;
+
   constructor() { }
 
   ngOnInit() {
+    //const now = new Date();
+    //this.today = now.toISOString();
   }
+
+
 
 }
