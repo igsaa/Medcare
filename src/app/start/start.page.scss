@@ -10,3 +10,15 @@
   bottom: 0px;
   padding-left: 20px;
 }
+
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: column;
+
+}
