@@ -14,7 +14,7 @@ export class StartPage implements OnInit {
   today;
 
   constructor(private dataService: DataService) {
-    this.loadData(); 
+    this.loadData();
   }
 
   async loadData() {

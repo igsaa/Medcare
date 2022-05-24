@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { toastController } from '@ionic/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -42,7 +41,7 @@ export class HomePage {
       this.failToast();
     }
     else{
-      if(this.listData[0].toString()!=this.user.toString() || this.listData[1]!=this.pass.toString()){
+      if(this.listData[0].toString()!==this.user.toString() || this.listData[1]!==this.pass.toString()){
         this.failAuth();
       }
       else {
@@ -55,10 +54,10 @@ export class HomePage {
     const toast = await this.toastController.create({
       message: 'Datos faltantes o erroneos',
       duration: 2000,
-      color: "danger",
-      position: "top",
+      color: 'danger',
+      position: 'top',
       cssClass: 'toast-crear',
-      icon: "alert-circle-outline"
+      icon: 'alert-circle-outline'
     });
     toast.present();
   }
@@ -67,10 +66,10 @@ export class HomePage {
     const toast = await this.toastController.create({
       message: 'Usuario y/o Contraseña Incorrectos',
       duration: 2000,
-      color: "danger",
-      position: "top",
+      color: 'danger',
+      position: 'top',
       cssClass: 'toast-crear',
-      icon: "alert-circle-outline"
+      icon: 'alert-circle-outline'
     });
     toast.present();
   }
@@ -79,10 +78,10 @@ export class HomePage {
     const toast = await this.toastController.create({
       message: 'Sesion iniciada',
       duration: 2000,
-      color: "success",
-      position: "top",
+      color: 'success',
+      position: 'top',
       cssClass: 'toast-crear',
-      icon: "checkmark-circle-outline"
+      icon: 'checkmark-circle-outline'
     });
     toast.present();
     this.router.navigate(['start']);

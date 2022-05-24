@@ -2,25 +2,37 @@
   background: white;
   height: 80px;
   position: relative;
+  padding-top: 10px;
+}
+
+.header-logo{
+  height: inherit;
 }
 
 .logo{
   height: 50px;
-  position: absolute;
+  position: relative;
   bottom: 0px;
   padding-left: 20px;
+}
+
+.button-close{
+  position: absolute;
+  right: 0;
 }
 
 .content{
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 30px;
 }
 
 .buttons{
   display: flex;
   flex-direction: column;
-
+  width: 80%;
+  padding-top: 30px;
 }
 
 .meds{
@@ -34,24 +46,21 @@
 
 .welcome{
   text-align: center;
+  font-family: Roboto400;
 }
 
-.dayName{
-  background-color: aquamarine;
-}
 
 .date{
   text-align: center;
   align-items: center;
-  width: 80%;
-  height: 250px;
+  padding-bottom: 20px;
+  font-family: Roboto100;
 }
 
-.day{
-  display: flex;
-  align-items: center;
+.dayName{
+  font-size: xx-large;
 }
 
-.dateCard{
-  height: 200px;
+.dayNumber{
+  font-size: xxx-large;
 }
