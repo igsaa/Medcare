@@ -15,7 +15,7 @@
 
 
     <ion-item class="form-login" color="light">
-      <ion-label position="floating">Usuario</ion-label>
+      <ion-label position="floating">RUT</ion-label>
       <ion-input [(ngModel)]="user"></ion-input>
     </ion-item>
 
@@ -25,7 +25,7 @@
     </ion-item>
 
     <div>
-      <ion-button (click)="addData(getElementbyid)" class="btn-login"  shape="round" size="default">Entrar</ion-button>
+      <ion-button (click)="validarLogin()" class="btn-login"  shape="round" size="default">Entrar</ion-button>
     </div>
 
 </div>

@@ -13,9 +13,7 @@ export class DataService {
   }
 
   async init() {
-    console.log('init');
     await this.storage.create();
-    console.log('Done');
   }
 
   getData(){

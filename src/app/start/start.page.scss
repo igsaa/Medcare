@@ -22,3 +22,36 @@
   flex-direction: column;
 
 }
+
+.meds{
+  width: 80%;
+  text-align: center;
+}
+
+.medCard{
+  text-align: center;
+}
+
+.welcome{
+  text-align: center;
+}
+
+.dayName{
+  background-color: aquamarine;
+}
+
+.date{
+  text-align: center;
+  align-items: center;
+  width: 80%;
+  height: 250px;
+}
+
+.day{
+  display: flex;
+  align-items: center;
+}
+
+.dateCard{
+  height: 200px;
+}
