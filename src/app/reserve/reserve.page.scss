@@ -19,10 +19,12 @@
 .title-div{
   display: flex;
   align-items: center;
+  padding-left: 10px;
 }
 
 .title{
   padding-left: 5vw;
+  margin: 20px 0 20px 0;
 }
 
 .button-native{
@@ -30,5 +32,6 @@
 }
 
 .button-start{
-  //width: 15%;
+  width: 10vw;
 }
+

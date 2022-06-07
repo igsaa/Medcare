@@ -28,3 +28,8 @@
 .toast-crear{
     --height: 70px
 }
+
+ion-button::part(native) {
+  //padding: 0;
+}
+
