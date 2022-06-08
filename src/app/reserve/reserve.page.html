@@ -12,9 +12,11 @@
       <button type="button" class="button-back" routerLink="/start"><ion-icon name="chevron-back-outline"></ion-icon> </button>
       <h1 class="title"> Reserva de horas</h1>
     </div>
-    <ion-datetime>
-      <div slot="title">My Custom Title</div>
-    </ion-datetime>
+    <div class="calendar">
+      <ion-datetime class="dates" presentation="date" first-day-of-week="1">
+        <div slot="title">My Custom Title</div>
+      </ion-datetime>
+    </div>
   </div>
 
 
