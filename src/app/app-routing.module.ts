@@ -19,6 +19,11 @@ const routes: Routes = [
     path: 'reserve',
     loadChildren: () => import('./reserve/reserve.module').then( m => m.ReservePageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+
 ];
 
 @NgModule({
