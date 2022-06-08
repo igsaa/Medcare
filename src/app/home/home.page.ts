@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { ToastController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 
@@ -14,8 +14,16 @@ export class HomePage {
   pass: string;
   listData = [];
 
-  constructor(private dataService: DataService, public toastController: ToastController, private router: Router) {
+  constructor(private dataService: DataService, public toastController: ToastController, private router: Router, public menuCtrl: MenuController) {
     this.loadData();
+  }
+
+  ionViewWillEnter(){
+    this.menuCtrl.enable(false);
+  }
+
+  ionViewDidLeave() {
+    this.menuCtrl.enable(true);
   }
 
   async loadData() {
