@@ -5,6 +5,11 @@
   padding-top: 10px;
 }
 
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+
 .header-logo{
   height: inherit;
 }
@@ -13,7 +18,7 @@
   height: 50px;
   position: relative;
   bottom: 0px;
-  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .title-div{

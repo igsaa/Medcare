@@ -9,3 +9,20 @@
 }
 
 
+ion-content{
+  --background: linear-gradient(153deg, rgba(255,255,255,1) 73%, rgb(128 255 241) 100%)  !important;
+}
+
+.list-menu{
+  height: 100%;
+  background: transparent;
+}
+
+.div-close{
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+

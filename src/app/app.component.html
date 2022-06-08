@@ -1,22 +1,43 @@
 <ion-app>
-  <ion-menu side="start" menuId="first" contentId="main">
+  <ion-menu side="start" menuId="first" contentId="main" type="push">
     <ion-header>
       <ion-toolbar color="secondary">
-        <ion-title>Start Menu</ion-title>
+        <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-list>
+      <ion-list class="list-menu">
         <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="start">Perfil Medico</ion-item>
+          <ion-item routerLink="profile" >
+            <ion-icon name="medical" slot="start" color="danger"></ion-icon>
+            <ion-label>Perfil Médico</ion-label>
+          </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="home">Datos de contacto</ion-item>
+          <ion-item>
+            <ion-icon name="document-text" slot="start"></ion-icon>
+            <ion-label>Datos de contacto</ion-label>
+          </ion-item>
         </ion-menu-toggle>
-        <ion-menu-toggle auto-hide="true">
-          <ion-item>Cerrar Sesion</ion-item>
-        </ion-menu-toggle>
+        <div class="div-close">
+          <ion-button class="button-close" color="danger" shape="round" size="default" routerLink="/home" >Cerrar Sesión</ion-button>
+        </div>
       </ion-list>
+
+
+<!--      <ion-list>
+        <ion-menu-toggle auto-hide="true">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <ion-item routerLink="profile">Perfil Medico</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-icon name="document-text"></ion-icon>
+          <ion-label>Datos de contacto</ion-label>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-button class="button-close" color="danger" shape="round" size="default" routerLink="/home" > Cerrar Sesión</ion-button>
+        </ion-menu-toggle>
+      </ion-list>-->
     </ion-content>
   </ion-menu>
 
