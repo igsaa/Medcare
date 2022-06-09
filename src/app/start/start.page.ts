@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { MyModalPage } from '../my-modal/my-modal.page';
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -13,8 +15,17 @@ export class StartPage implements OnInit {
   meds;
   today;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private modalCtrl: ModalController) {
     this.loadData();
+  }
+
+  async openModal(){
+    const modal = await this.modalCtrl.create({
+      component: MyModalPage,
+      cssClass: 'popup-modal'
+    });
+
+    await modal.present();
   }
 
   async loadData() {

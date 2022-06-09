@@ -31,7 +31,7 @@
 
 .popup-modal{
   &::part(backdrop){
-    background-color: red;
+    background-color: hsla(0, 0%, 0%, 0.247);
   }
   &::part(content){
     width: 80%;
