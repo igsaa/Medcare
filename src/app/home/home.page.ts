@@ -14,7 +14,8 @@ export class HomePage {
   pass: string;
   listData = [];
 
-  constructor(private dataService: DataService, public toastController: ToastController, private router: Router, public menuCtrl: MenuController) {
+  constructor(private dataService: DataService, public toastController: ToastController, private router: Router,
+    public menuCtrl: MenuController) {
     this.loadData();
   }
 
