@@ -49,10 +49,13 @@
 
 .calendar{
   display: flex;
+  width: 100%;
+  height: auto;
   justify-content: center;
   padding-top: 20px;
 }
 
 .dates{
   border-radius: 5%;
+  width: 100%;
 }
