@@ -7,3 +7,13 @@ ion-toolbar {
         }
     }
 }
+
+.close{
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+    
+    .close-button {
+        height: 50px;
+    }
+}

@@ -1,3 +1,13 @@
+<header>
+  <ion-toolbar>
+    <div class="close">
+      <ion-button class="close-button" (click)="dismiss()" fill="clear" color="light" color="tertiary">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</header>
+
 <ion-content [fullscreen]="true">
   <ion-item>
     <ion-label>9:00</ion-label>
@@ -18,11 +28,3 @@
     <ion-label>14:00</ion-label>
   </ion-item>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-button (click)="dismiss()" fill="clear" color="light">
-      <ion-icon slot="icon-only" name="close-circle"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>
