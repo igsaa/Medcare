@@ -3,20 +3,39 @@
     height: 80px;
     position: relative;
     padding-top: 10px;
-  }
+}
 
-  .header-logo{
-    height: inherit;
-  }
+.header-logo{
+  height: inherit;
+}
 
-  .logo{
-    height: 50px;
-    position: relative;
-    bottom: 0px;
-    padding-right: 20px;
-  }
+.logo{
+  height: 50px;
+  position: relative;
+  bottom: 0px;
+  padding-right: 20px;
+}
 
-  .header{
-    display: flex;
-    justify-content: space-between;
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.contedido{
+  justify-content: center;
+}
+
+.medico{
+  width: 50%;
+  margin: auto;
+
+  img{
+    border-radius: 20%;
   }
+}
+
+.docName{
+  text-align: center;
+  font-family: Roboto400;
+}
+

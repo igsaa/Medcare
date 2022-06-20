@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },  {
+    path: 'my-data',
+    loadChildren: () => import('./my-data/my-data.module').then( m => m.MyDataPageModule)
   },
+
 
 ];
 

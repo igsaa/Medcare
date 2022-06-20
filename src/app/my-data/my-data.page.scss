@@ -1,0 +1,57 @@
+.head{
+    background: white;
+    height: 80px;
+    position: relative;
+    padding-top: 10px;
+}
+
+.header-logo{
+  height: inherit;
+}
+
+.logo{
+  height: 50px;
+  position: relative;
+  bottom: 0px;
+  padding-right: 20px;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.contenido{
+    width: 80%;
+    margin: auto;
+}
+
+.phone, .email, .address{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    label, input{
+        padding: 10px 0 10px 0; 
+    }
+    input {
+        height: 3rem;
+        border-radius: 20px;
+        border: solid grey 1px;
+        padding-left: 15px;
+        background-color: rgb(241, 241, 241);
+    }
+
+    label{
+        font-family: Roboto400;
+    }
+}
+
+.form{
+    .save{
+        width: 80%;
+        margin: auto;
+        .button-save{
+            width: 100%;
+        }
+    }
+}
