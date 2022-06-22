@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { DbService } from '../services/db.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class HomePage {
   listData = [];
 
   constructor(private dataService: DataService, public toastController: ToastController, private router: Router,
-    public menuCtrl: MenuController) {
+    public menuCtrl: MenuController, private dbservice: DbService) {
     this.loadData();
   }
 
