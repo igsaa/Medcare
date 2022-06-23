@@ -98,21 +98,20 @@ export class HomePage {
   }
 
   guardarDatos(){
-    this.dbservice.guardarDatos(this.rut, this.pass).then((data)=>{
-      this.cargarDatos();
-    }).catch((e)=>{
-      console.log('usuario no guardado')
-    })
+    this.dbservice.guardarDatos(this.rut, this.pass)
   }
 
   cargarDatos(){
-    this.dbservice.cargarDatos(this.rut).then((data:any)=>{
-      console.log(data);
-      this.usuario = data;
-      console.log(this.usuario);
-    }).catch((e)=>{
-      console.log('usuario no cargado')
-    })
+    this.dbservice.cargarDatos(this.rut)
+  }
+
+  logear(){
+    if(this.dbservice.consultarDatos(this.rut, this.pass)){
+      this.successToast()
+    }
+    else{
+      this.failAuth()
+    }
   }
 
 }
