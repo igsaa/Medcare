@@ -11,13 +11,13 @@ import { DbService } from '../services/db.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  user: string;
-  pass: string;
+  rut: string = '';
+  pass: string = '';
+  usuario: any;
   listData = [];
 
   constructor(private dataService: DataService, public toastController: ToastController, private router: Router,
     public menuCtrl: MenuController, private dbservice: DbService) {
-    this.loadData();
   }
 
   ionViewWillEnter(){
@@ -33,7 +33,7 @@ export class HomePage {
   }
 
   async addData() {
-    await this.dataService.addData(this.user);
+    await this.dataService.addData(this.rut);
     await this.dataService.addData(this.pass);
     await this.dataService.addData('Alan Moscoso');
     await this.dataService.addData('ASMA');
@@ -47,11 +47,11 @@ export class HomePage {
   }
 
   validarLogin() {
-    if(this.user==null || this.pass==null){
+    if(this.rut==null || this.pass==null){
       this.failToast();
     }
     else{
-      if(this.listData[0].toString()!==this.user.toString() || this.listData[1]!==this.pass.toString()){
+      if(this.listData[0].toString()!==this.rut.toString() || this.listData[1]!==this.pass.toString()){
         this.failAuth();
       }
       else {
@@ -96,4 +96,23 @@ export class HomePage {
     toast.present();
     this.router.navigate(['start']);
   }
+
+  guardarDatos(){
+    this.dbservice.guardarDatos(this.rut, this.pass).then((data)=>{
+      this.cargarDatos();
+    }).catch((e)=>{
+      console.log('usuario no guardado')
+    })
+  }
+
+  cargarDatos(){
+    this.dbservice.cargarDatos(this.rut).then((data:any)=>{
+      console.log(data);
+      this.usuario = data;
+      console.log(this.usuario);
+    }).catch((e)=>{
+      console.log('usuario no cargado')
+    })
+  }
+
 }

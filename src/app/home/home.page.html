@@ -15,8 +15,8 @@
 
 
     <ion-item class="form-login" color="light">
-      <ion-label position="floating">RUT</ion-label>
-      <ion-input [(ngModel)]="user"></ion-input>
+      <ion-label position="floating">RUT  {{usuario.pass}}</ion-label>
+      <ion-input [(ngModel)]="rut"></ion-input>
     </ion-item>
 
     <ion-item class="form-login" color="light">
@@ -25,7 +25,7 @@
     </ion-item>
 
     <div>
-      <ion-button routerLink="/start" class="btn-login"  shape="round" size="default" color="tertiary">Entrar</ion-button>
+      <ion-button (click)="cargarDatos()" class="btn-login"  shape="round" size="default" color="tertiary">Entrar</ion-button>
     </div>
 
 </div>
