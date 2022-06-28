@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
+import { DbService } from '../services/db.service';
 import { MyModalPage } from '../my-modal/my-modal.page';
 import { ModalController } from '@ionic/angular';
 
@@ -15,8 +15,7 @@ export class StartPage implements OnInit {
   meds;
   today;
 
-  constructor(private dataService: DataService, private modalCtrl: ModalController) {
-    this.loadData();
+  constructor(private dataService: DbService, private modalCtrl: ModalController) {
   }
 
   async openModal(){
@@ -26,12 +25,6 @@ export class StartPage implements OnInit {
     });
 
     await modal.present();
-  }
-
-  async loadData() {
-    this.listData = await this.dataService.getData();
-    this.name = this.listData[2].toString();
-    this.meds = this.listData[4].toString();
   }
 
   ngOnInit() {

@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { DbService } from './services/db.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,8 +17,9 @@ import { DbService } from './services/db.service';
   imports: [BrowserModule, 
     IonicModule.forRoot(),
     AppRoutingModule,
+    HttpClientModule,
     IonicStorageModule.forRoot({
-      name: "mydatabase"
+      name: "medcareDatabase"
     })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, DbService],

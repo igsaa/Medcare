@@ -1,0 +1,41 @@
+{
+    "database": "dara.db",
+    "version": 1,
+    "encrypted": false,
+    "mode": "full",
+    "tables": [
+      {
+        "name": "usuario",
+        "schema": [
+          { "column": "rut", "value": "VARCHAR(20) PRIMARY KEY NOT NULL" },
+          { "column": "pass", "value": "VARCHAR(20)" },
+          { "column": "nombre", "value": "VARCHAR(20)" },
+          { "column": "apellido", "value": "VARCHAR(20)" },
+          { "column": "telefono", "value": "INTEGER(9)" },
+          { "column": "direccion", "value": "VARCHAR(20)" },
+          { "column": "email", "value": "VARCHAR(20)" },
+          { "column": "id_doctor", "value": "INTEGER" },
+          {
+            "foreignkey": "id_doctor",
+            "value": "REFERENCES doctor(id)"
+          }
+        ],
+        "values": [
+          ["asd", 123, "Arnaldo", "Navarrete", 946839644, "Libertad 9465", "arn.navarrete@duocuc.cl", 1]
+        ]
+      },
+      {
+        "name": "doctor",
+        "schema": [
+          { "column": "id_doctor", "value": "INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT" },
+          { "column": "nombre", "value": "VARCHAR(20)" },
+          { "column": "apellido", "value": "VARCHAR(20)" },
+          { "column": "especialidad", "value": "VARCHAR(50)" },
+          { "column": "email", "value": "VARCHAR(50)" }
+        ],
+        "values": [
+          [1, "Eliseo", "Chinchurreta", "Proctologo", "eli.chichu@medico.cl"]
+        ]
+      }
+    ]
+  }

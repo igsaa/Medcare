@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DataService } from '../services/data.service';
 import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { DbService } from '../services/db.service';
@@ -16,7 +15,7 @@ export class HomePage {
   usuario: any;
   listData = [];
 
-  constructor(private dataService: DataService, public toastController: ToastController, private router: Router,
+  constructor(public toastController: ToastController, private router: Router,
     public menuCtrl: MenuController, private dbservice: DbService) {
   }
 
@@ -26,24 +25,6 @@ export class HomePage {
 
   ionViewDidLeave() {
     this.menuCtrl.enable(true);
-  }
-
-  async loadData() {
-    this.listData = await this.dataService.getData();
-  }
-
-  async addData() {
-    await this.dataService.addData(this.rut);
-    await this.dataService.addData(this.pass);
-    await this.dataService.addData('Alan Moscoso');
-    await this.dataService.addData('ASMA');
-    await this.dataService.addData('Budesonida');
-    this.loadData();
-  }
-
-  async removeItem(index) {
-    this.dataService.removeItem(index);
-    this.listData.splice(index, 1);
   }
 
   validarLogin() {
@@ -97,21 +78,23 @@ export class HomePage {
     this.router.navigate(['start']);
   }
 
-  guardarDatos(){
-    this.dbservice.guardarDatos(this.rut, this.pass)
+  createTables(){
+    this.dbservice.createTables(this.dbservice.database);
   }
 
-  cargarDatos(){
-    this.dbservice.cargarDatos(this.rut)
+  insertIntos(){
+    this.dbservice.insertIntos(this.dbservice.database);
   }
 
   logear(){
-    if(this.dbservice.consultarDatos(this.rut, this.pass)){
-      this.successToast()
-    }
-    else{
-      this.failAuth()
-    }
+    this.dbservice.consultarDatos(this.rut, this.pass, this.dbservice.database)
+    .then((data) => {
+      if(data){
+        this.successToast();
+      }
+      else{
+        this.failAuth();
+      }
+    })
   }
-
 }
