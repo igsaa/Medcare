@@ -100,7 +100,8 @@ export class DbService {
           resolve(this.verificar_usuario_correcto);
         }
       }else{
-        alert(`Usuario o Contraseña incorrectos`)
+        this.verificar_usuario_correcto = false;
+        resolve(this.verificar_usuario_correcto);
       }
     }).catch(e => {
       alert("error consultarDatos() 1er if" + JSON.stringify(e))
