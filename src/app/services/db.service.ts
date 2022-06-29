@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Platform } from '@ionic/angular';
-import { SqliteDbCopy } from '@ionic-native/sqlite-db-copy';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +10,7 @@ import { SqliteDbCopy } from '@ionic-native/sqlite-db-copy';
 export class DbService {
   database: SQLiteObject;
   isReady: boolean;
+  array_usuario_login: any = [];
   array_usuarios: any = [];
   array_doctores: any = [];
   verificar_usuario_correcto: boolean;
@@ -33,7 +33,6 @@ export class DbService {
         this.isReady = true;
       }).catch((e)=>{
         alert(`error constructor()` + JSON.stringify(e))
-        console.log('error constructor()' + e);
       })
     }
   }
@@ -70,22 +69,83 @@ export class DbService {
       (rut, pass, nombre, apellido, telefono, direccion, email, id_doctor)
         VALUES
       ('19026008-9', '123456', 'Arnaldo', 'Navarrete', '946839644', 'Libertad 9465', 'arn.navarrete@duocuc.cl', '1'),
-      ('123', 'asd', 'Arnaldo', 'Navarrete', '946839644', 'Libertad 9465', 'arn.navarrete@duocuc.cl', '1')`, [])
-      .catch(e => {
-        alert("error insertIntos() usuarios" + JSON.stringify(e))
-      });
+      ('asd', 'asd', 'Arnaldo', 'Navarrete', '946839644', 'Libertad 9465', 'arn.navarrete@duocuc.cl', '1')`, [])
+      .catch(e => {});
     db.executeSql(`INSERT INTO ${this.tables.doctor}
       (nombre, apellido, especialidad, email)
         VALUES
-      ('Eliseo', 'Chinchurreta', 'Proctologo', 'eli.chichu@medico.cl');`, [])
-      .catch(e => {
-        alert("error insertIntos() doctor" + JSON.stringify(e))
-      });
+      ('Eliseo', 'Chinchurreta', 'Proctologo', 'eli.chinchurreta@medico.cl');`, [])
+      .catch(e => {});
   }
 
-  consultarDatos(rut: any, pass: any, db: SQLiteObject){
+  consultarDatosLogin(rut: any, pass: any, db: SQLiteObject){
     return new Promise((resolve) => {
-      return db.executeSql(`SELECT * FROM ${this.tables.usuario} where rut = ?`, [rut])
+      return db.executeSql(`SELECT * FROM ${this.tables.usuario} WHERE rut = ?`, [rut])
+    .then((data) => {
+      this.array_usuario_login = [];
+      if (data.rows.length > 0) {
+        for (var i = 0; i < data.rows.length; i++) {
+          this.array_usuario_login.push({
+            rut: data.rows.item(i).rut,
+            pass: data.rows.item(i).pass
+          });
+        }
+        if (this.array_usuario_login.map(usuario => usuario.rut) == rut && 
+        this.array_usuario_login.map(usuario => usuario.pass) == pass){
+          this.verificar_usuario_correcto = true;
+          resolve(this.verificar_usuario_correcto);
+        }
+        else{
+          this.verificar_usuario_correcto = false;
+          resolve(this.verificar_usuario_correcto);
+        }
+      }else{
+        alert(`Usuario o Contraseña incorrectos`)
+      }
+    }).catch(e => {
+      alert("error consultarDatos() 1er if" + JSON.stringify(e))
+    });
+    });
+  }
+
+  datosUsuario(rut: any, db: SQLiteObject) {
+    return new Promise((resolve) => {
+    /* this.database.executeSql(
+      `SELECT * FROM ${this.tables.usuario} u 
+      JOIN ${this.tables.doctor} d 
+      ON u.id_doctor = d.id_doctor 
+      WHERE rut = ?`,[rut]) */
+      return db.executeSql(`SELECT * FROM ${this.tables.usuario} WHERE rut = ?`,[rut])
+      .then((data) => {
+        this.array_usuarios = [];
+        if (data.rows.length > 0) {
+          for (var i = 0; i < data.rows.length; i++) {
+            this.array_usuarios.push({
+              rut: data.rows.item(i).rut,
+              pass: data.rows.item(i).pass,
+              nombre: data.rows.item(i).nombre,
+              apellido: data.rows.item(i).apellido,
+              telefono: data.rows.item(i).telefono,
+              direccion: data.rows.item(i).direccion,
+              email: data.rows.item(i).email,
+              id_doctor: data.rows.item(i).id_doctor
+            });
+          }
+          resolve(this.array_usuarios);
+        }else{
+          alert("error datosUsuario() else")
+          resolve(this.array_usuarios);
+        }
+      })
+      .catch(e => {
+        alert("error " + JSON.stringify(e))
+      });
+    });
+  }
+
+  datosDoctor(rut: any, pass: any, db: SQLiteObject){
+    return new Promise((resolve) => {
+      return db.executeSql(`SELECT * FROM ${this.tables.usuario} WHERE rut = ?`, [rut])
     .then((data) => {
       this.array_usuarios = [];
       if (data.rows.length > 0) {
@@ -108,15 +168,11 @@ export class DbService {
         alert(`Usuario o Contraseña incorrectos`)
       }
     }).catch(e => {
-      alert("error consultarDatos() 2do IF" + JSON.stringify(e))
+      alert("error datosDoctor() 1er if" + JSON.stringify(e))
     });
     });
   }
 
-  canActivate() {
-    this.router.navigate(['/home'])
-    return false;
-  }
 }
 
 

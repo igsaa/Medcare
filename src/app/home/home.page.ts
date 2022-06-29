@@ -9,10 +9,10 @@ import { DbService } from '../services/db.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
-  rut: string = '';
-  pass: string = '';
-  usuario: any;
+  public rut: string = '';
+  public pass: string = '';
   listData = [];
 
   constructor(public toastController: ToastController, private router: Router,
@@ -78,16 +78,8 @@ export class HomePage {
     this.router.navigate(['start']);
   }
 
-  createTables(){
-    this.dbservice.createTables(this.dbservice.database);
-  }
-
-  insertIntos(){
-    this.dbservice.insertIntos(this.dbservice.database);
-  }
-
   logear(){
-    this.dbservice.consultarDatos(this.rut, this.pass, this.dbservice.database)
+    this.dbservice.consultarDatosLogin(this.rut, this.pass, this.dbservice.database)
     .then((data) => {
       if(data){
         this.successToast();
@@ -97,4 +89,7 @@ export class HomePage {
       }
     })
   }
+
+
+
 }
