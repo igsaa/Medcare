@@ -109,14 +109,14 @@ export class DbService {
     });
   }
 
-  datosUsuario(rut: any, db: SQLiteObject) {
-    return new Promise((resolve) => {
+  datosUsuario(rut: any) {
+    return new Promise((resolve: any) => {
     /* this.database.executeSql(
       `SELECT * FROM ${this.tables.usuario} u 
       JOIN ${this.tables.doctor} d 
       ON u.id_doctor = d.id_doctor 
       WHERE rut = ?`,[rut]) */
-      return db.executeSql(`SELECT * FROM ${this.tables.usuario} WHERE rut = ?`,[rut])
+      return this.database.executeSql(`SELECT * FROM ${this.tables.usuario} WHERE rut = ?`,[rut])
       .then((data) => {
         this.array_usuarios = [];
         if (data.rows.length > 0) {
@@ -134,7 +134,7 @@ export class DbService {
           }
           resolve(this.array_usuarios);
         }else{
-          alert("error datosUsuario() else")
+          alert("No hyay datos para SELECT")
           resolve(this.array_usuarios);
         }
       })
