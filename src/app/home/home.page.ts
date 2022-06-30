@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { DbService } from '../services/db.service';
 
@@ -15,7 +15,15 @@ export class HomePage {
   public pass: string = '';
   listData = [];
 
-  constructor(public toastController: ToastController, private router: Router, private dbservice: DbService) {}
+  constructor(public toastController: ToastController, private router: Router, private dbservice: DbService, private menuCtrl: MenuController) {}
+
+  ionViewWillEnter(){
+    this.menuCtrl.enable(false);
+  }
+
+  ionViewDidLeave() {
+    this.menuCtrl.enable(true);
+  }
 
   async failAuth() {
     const toast = await this.toastController.create({
@@ -28,8 +36,20 @@ export class HomePage {
     });
     toast.present();
   }
+
+  async emptyToast() {
+    const toast = await this.toastController.create({
+      message: 'Datos Faltantes',
+      duration: 2000,
+      color: 'danger',
+      position: 'top',
+      cssClass: 'toast-crear',
+      icon: 'alert-circle-outline'
+    });
+    toast.present();
+  }
   
-  async successToast() {
+  async successToast(rut) {
     const toast = await this.toastController.create({
       message: 'Sesion iniciada',
       duration: 2000,
@@ -39,18 +59,23 @@ export class HomePage {
       icon: 'checkmark-circle-outline'
     });
     toast.present();
-    this.router.navigate(['start']);
+    this.router.navigate(['start', rut]);
   }
 
   logear(){
-    this.dbservice.consultarDatosLogin(this.rut, this.pass, this.dbservice.database)
+    if (this.rut === '' || this.pass === ''){
+      this.emptyToast();
+    }
+    else{
+      this.dbservice.consultarDatosLogin(this.rut, this.pass, this.dbservice.database)
     .then((data) => {
       if(data){
-        this.successToast();
+        this.successToast(this.rut);
       }
       else{
         this.failAuth();
       }
     })
+    } 
   }
 }

@@ -56,7 +56,9 @@ export class DbService {
         apellido VARCHAR(20),
         telefono INTEGER(9),
         direccion VARCHAR(20),
-        email VARCHAR(50), ADDRESS VARCHAR(100),
+        email VARCHAR(50),
+        enfermedad VARCHAR(50),
+        remedio VARCHAR(50),
         id_doctor INTEGER,
         FOREIGN KEY(id_doctor) REFERENCES ${this.tables.doctor}(id_doctor)
     );`, []).catch(e => {
@@ -66,15 +68,17 @@ export class DbService {
 
   insertIntos(db: SQLiteObject){
     db.executeSql(`INSERT INTO ${this.tables.usuario}
-      (rut, pass, nombre, apellido, telefono, direccion, email, id_doctor)
+      (rut, pass, nombre, apellido, telefono, direccion, email, enfermedad, remedio, id_doctor)
         VALUES
-      ('19026008-9', '123456', 'Arnaldo', 'Navarrete', '946839644', 'Libertad 9465', 'arn.navarrete@duocuc.cl', '1'),
-      ('asd', 'asd', 'Arnaldo', 'Navarrete', '946839644', 'Libertad 9465', 'arn.navarrete@duocuc.cl', '1')`, [])
+      ('19026008-9', '123456', 'Arnaldo', 'Navarrete', '946839644', 'Libertad 9465', 'arn.navarrete@duocuc.cl', 'VIH', 'Terapia Antirretroviral', '1'),
+      ('18879839-k', '123456', 'Alan', 'Moscoso', '962217128', 'José Donoso 11003', 'ala.moscoso@duocuc.cl', 'Asma', 'Salbutamol', '2'),
+      ('asd', 'asd', 'Nombre asd', 'Apellido asd', '123456789', 'calle falsa 1234', 'asd.asd@asd.asd', 'ASD', 'asd', '2')`, [])
       .catch(e => {});
     db.executeSql(`INSERT INTO ${this.tables.doctor}
       (nombre, apellido, especialidad, email)
         VALUES
-      ('Eliseo', 'Chinchurreta', 'Proctologo', 'eli.chinchurreta@medico.cl');`, [])
+      ('Eliseo', 'Chinchurreta', 'Inmunólogo', 'eli.chinchurreta@medico.cl'),
+      ('Ignacio', 'Saavedra', 'Neumólogo', 'ign.saavedra@medico.cl');`, [])
       .catch(e => {});
   }
 
@@ -104,13 +108,13 @@ export class DbService {
         resolve(this.verificar_usuario_correcto);
       }
     }).catch(e => {
-      alert("error consultarDatos() 1er if" + JSON.stringify(e))
+      alert("error consultarDatosLogin() 1er if" + JSON.stringify(e))
     });
     });
   }
 
   datosUsuario(rut: any) {
-    return new Promise((resolve: any) => {
+    return new Promise((resolve) => {
     /* this.database.executeSql(
       `SELECT * FROM ${this.tables.usuario} u 
       JOIN ${this.tables.doctor} d 
@@ -129,12 +133,13 @@ export class DbService {
               telefono: data.rows.item(i).telefono,
               direccion: data.rows.item(i).direccion,
               email: data.rows.item(i).email,
+              enfermedad: data.rows.item(i).enfermedad,
+              remedio: data.rows.item(i).remedio,
               id_doctor: data.rows.item(i).id_doctor
             });
           }
           resolve(this.array_usuarios);
         }else{
-          alert("No hyay datos para SELECT")
           resolve(this.array_usuarios);
         }
       })

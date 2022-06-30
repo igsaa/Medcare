@@ -1,0 +1,33 @@
+<header class="head" >
+  <div class="header">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <div class="header-logo">
+      <img class="logo" src="../../assets/Vector.svg" alt="">
+    </div>
+  </div>
+</header>
+
+<ion-content>
+  <div class="contenido">
+    <div class="titulo">
+      <ion-label class="alarm">Alarmas</ion-label>
+    </div>
+    <ion-list class="lista">
+      <ion-item>
+        <ion-label>{{hora}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <div class="add">
+      <ion-fab vertical="center" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="openTime()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </div>
+    <div class="activar">
+      <ion-button (click)="notificationModel()" expand="block" fill="clear" shape="round">Activar</ion-button>
+    </div>
+  </div>
+</ion-content>
