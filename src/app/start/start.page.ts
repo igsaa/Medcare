@@ -3,7 +3,7 @@ import { MyModalPage } from '../my-modal/my-modal.page';
 import { ModalController } from '@ionic/angular';
 import { HomePage } from '../home/home.page';
 import { DbService } from '../services/db.service';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-start',

@@ -13,6 +13,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'start',
+    loadChildren: () => import('./start/start.module').then( m => m.StartPageModule)
+  },
+  {
     path: 'start/:rut',
     loadChildren: () => import('./start/start.module').then( m => m.StartPageModule)
   },

@@ -94,7 +94,7 @@ export class DbService {
             pass: data.rows.item(i).pass
           });
         }
-        if (this.array_usuario_login.map(usuario => usuario.rut) == rut && 
+        if (this.array_usuario_login.map(usuario => usuario.rut) == rut &&
         this.array_usuario_login.map(usuario => usuario.pass) == pass){
           this.verificar_usuario_correcto = true;
           resolve(this.verificar_usuario_correcto);
@@ -116,9 +116,9 @@ export class DbService {
   datosUsuario(rut: any) {
     return new Promise((resolve) => {
     /* this.database.executeSql(
-      `SELECT * FROM ${this.tables.usuario} u 
-      JOIN ${this.tables.doctor} d 
-      ON u.id_doctor = d.id_doctor 
+      `SELECT * FROM ${this.tables.usuario} u
+      JOIN ${this.tables.doctor} d
+      ON u.id_doctor = d.id_doctor
       WHERE rut = ?`,[rut]) */
       return this.database.executeSql(`SELECT * FROM ${this.tables.usuario} WHERE rut = ?`,[rut])
       .then((data) => {
@@ -161,7 +161,7 @@ export class DbService {
             pass: data.rows.item(i).pass
           });
         }
-        if (this.array_usuarios.map(usuario => usuario.rut) == rut && 
+        if (this.array_usuarios.map(usuario => usuario.rut) == rut &&
         this.array_usuarios.map(usuario => usuario.pass) == pass){
           this.verificar_usuario_correcto = true;
           resolve(this.verificar_usuario_correcto);
