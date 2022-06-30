@@ -12,10 +12,18 @@ ion-toolbar {
     display: flex;
     justify-content: flex-end;
     width: auto;
-    
+
     .close-button {
         height: 50px;
     }
+}
+
+.buttons{
+  background: rgb(56 128 255);
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  color: white;
 }
 
 ion-content{

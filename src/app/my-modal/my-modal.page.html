@@ -1,30 +1,7 @@
-<header>
-  <ion-toolbar>
-    <div class="close">
-      <ion-button class="close-button" (click)="dismiss()" fill="clear" color="light" color="tertiary">
-        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
-      </ion-button>
-    </div>
-  </ion-toolbar>
-</header>
-
-<ion-content [fullscreen]="true">
-  <ion-item>
-    <ion-label>9:00</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>10:00</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>11:00</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>12:00</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>13:00</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>14:00</ion-label>
-  </ion-item>
+<ion-content >
+  <h4>Seleccione hora</h4>
+  <ion-datetime presentation="time" hour-cycle="h23" [hourValues]="hourValues" [min]="minTime" [max]="maxTime"
+  #time (ionChange)="timeSelected(time.value)"></ion-datetime>
+  <ion-button color="secondary" (click)="dismiss()" >Volver </ion-button>
+  <ion-button color="secondary">Continuar {{ timeFormattedString }}</ion-button>
 </ion-content>

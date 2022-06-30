@@ -12,7 +12,7 @@ import { DbService } from '../services/db.service';
 export class StartPage implements OnInit {
   homepage: any;
   listData = [];
-  name: string = '';
+  name: '';
   meds;
   today;
 
@@ -20,13 +20,13 @@ export class StartPage implements OnInit {
     this.homepage = HomePage;
     this.llenarNombre();
   }
-  
+
   llenarNombre(){
-    this.dbservice.datosUsuario("asd").then((array: any) => {
+    this.dbservice.datosUsuario('asd').then((array: any) => {
       this.name = array.map(user => user.email);
-    })
+    });
   }
-    
+
   async openModal(){
     const modal = await this.modalCtrl.create({
       component: MyModalPage,
