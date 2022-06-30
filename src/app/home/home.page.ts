@@ -36,6 +36,18 @@ export class HomePage {
     });
     toast.present();
   }
+
+  async emptyToast() {
+    const toast = await this.toastController.create({
+      message: 'Datos Faltantes',
+      duration: 2000,
+      color: 'danger',
+      position: 'top',
+      cssClass: 'toast-crear',
+      icon: 'alert-circle-outline'
+    });
+    toast.present();
+  }
   
   async successToast(rut) {
     const toast = await this.toastController.create({
@@ -51,7 +63,11 @@ export class HomePage {
   }
 
   logear(){
-    this.dbservice.consultarDatosLogin(this.rut, this.pass, this.dbservice.database)
+    if (this.rut === '' || this.pass === ''){
+      this.emptyToast();
+    }
+    else{
+      this.dbservice.consultarDatosLogin(this.rut, this.pass, this.dbservice.database)
     .then((data) => {
       if(data){
         this.successToast(this.rut);
@@ -60,5 +76,6 @@ export class HomePage {
         this.failAuth();
       }
     })
+    } 
   }
 }

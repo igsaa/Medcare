@@ -40,3 +40,15 @@
     border-radius: 10px;
   }
 }
+
+.popupTime-modal{
+  &::part(backdrop){
+    background-color: hsla(0, 0%, 0%, 0.9);
+  }
+  &::part(content){
+    width: 80%;
+    height: 50%;
+    margin: auto;
+    border-radius: 10px;
+  }
+}

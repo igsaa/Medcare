@@ -28,6 +28,19 @@ const routes: Routes = [
     path: 'my-data',
     loadChildren: () => import('./my-data/my-data.module').then( m => m.MyDataPageModule)
   },
+  {
+    path: 'alarm',
+    loadChildren: () => import('./alarm/alarm.module').then( m => m.AlarmPageModule)
+  },
+  {
+    path: 'alarm/:hora',
+    loadChildren: () => import('./alarm/alarm.module').then( m => m.AlarmPageModule)
+  },
+  {
+    path: 'alarm-modal',
+    loadChildren: () => import('./alarm-modal/alarm-modal.module').then( m => m.AlarmModalPageModule)
+  },
+
 
 
 ];

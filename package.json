@@ -25,6 +25,7 @@
     "@capacitor/core": "^3.5.0",
     "@capacitor/haptics": "1.1.4",
     "@capacitor/keyboard": "1.2.2",
+    "@capacitor/local-notifications": "^1.1.0",
     "@capacitor/status-bar": "1.0.8",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/sqlite": "^5.36.0",
@@ -33,6 +34,7 @@
     "@ionic/storage-angular": "^3.0.6",
     "cordova-plugin-dbcopy": "^2.1.2",
     "cordova-sqlite-storage": "^6.0.0",
+    "date-fns": "^2.28.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
