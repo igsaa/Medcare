@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Platform } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
@@ -23,7 +22,7 @@ export class DbService {
     doctor: "doctor"
   };
 
-  constructor(private router: Router, private sqlite: SQLite, private platform: Platform) {
+  constructor(private sqlite: SQLite, private platform: Platform) {
     if(!this.isReady){
       this.sqlite = new SQLite();
       this.sqlite.create({
@@ -62,6 +61,7 @@ export class DbService {
         email VARCHAR(50),
         enfermedad VARCHAR(50),
         remedio VARCHAR(50),
+        dosis VARCHAR(50),
         id_doctor INTEGER,
         FOREIGN KEY(id_doctor) REFERENCES ${this.tables.doctor}(id_doctor)
     );`, []).catch(e => {
@@ -71,11 +71,11 @@ export class DbService {
 
   insertIntos(db: SQLiteObject){
     db.executeSql(`INSERT INTO ${this.tables.usuario}
-      (rut, pass, nombre, apellido, telefono, direccion, email, enfermedad, remedio, id_doctor)
+      (rut, pass, nombre, apellido, telefono, direccion, email, enfermedad, remedio, dosis, id_doctor)
         VALUES
-      ('19026008-9', '123456', 'Arnaldo', 'Navarrete', '946839644', 'Libertad 9465', 'arn.navarrete@duocuc.cl', 'VIH', 'Terapia Antirretroviral', '1'),
-      ('18879839-k', '123456', 'Alan', 'Moscoso', '962217128', 'José Donoso 11003', 'ala.moscoso@duocuc.cl', 'Asma', 'Salbutamol', '2'),
-      ('asd', 'asd', 'Nombre asd', 'Apellido asd', '123456789', 'calle falsa 1234', 'asd.asd@asd.asd', 'ASD', 'asd', '2')`, [])
+      ('19026008-9', '123456', 'Arnaldo', 'Navarrete', '946839644', 'Libertad 9465', 'arn.navarrete@duocuc.cl', 'VIH', 'Terapia Antirretroviral', '2 veces a la semana', '1'),
+      ('18879839-k', '123456', 'Alan', 'Moscoso', '962217128', 'José Donoso 11003', 'ala.moscoso@duocuc.cl', 'Asma', 'Salbutamol', '2 dosis cada 2 días', '2'),
+      ('asd', 'asd', 'Nombre asd', 'Apellido asd', '123456789', 'calle falsa 1234', 'asd.asd@asd.asd', 'ASD', 'asd', 'asd pastillas todas las mañanas', '2')`, [])
       .catch(e => {});
     db.executeSql(`INSERT INTO ${this.tables.doctor}
       (nombre, apellido, especialidad, email)
@@ -133,6 +133,7 @@ export class DbService {
               email: data.rows.item(i).email,
               enfermedad: data.rows.item(i).enfermedad,
               remedio: data.rows.item(i).remedio,
+              dosis: data.rows.item(i).dosis,
               id_doctor: data.rows.item(i).id_doctor
             });
           }

@@ -14,16 +14,15 @@
     <div class="form">
       <div class="phone">
         <label for="">Teléfono</label>
-        <!--<ion-button (click)="llenarTelefono()" class="btn-login"  shape="round" size="default" color="tertiary">Llenar</ion-button>-->
-        <input type="text" value="">
+        <input type="text" value="{{ telefono }}">
       </div>
       <div class="email">
         <label for="">Email</label>
-        <input type="text">
+        <input type="text" value="{{ email }}">
       </div>
       <div class="address">
         <label for="">Dirección</label>
-        <input type="text">
+        <input type="text" value="{{ direccion }}">
       </div>
       <div class="save">
         <ion-button class="button-save" shape="round" color="tertiary"><ion-icon name="save-outline"></ion-icon> Guardar</ion-button>

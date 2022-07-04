@@ -18,21 +18,19 @@
 
     <div class="date">
       <h1 class="dayName">
-        Jueves
+        {{ today_nombre }}
       </h1>
       <h1 class="dayNumber">
-        9
+        {{ today_numero }}
       </h1>
     </div>
 
     <div class="meds">Receta
       <ion-card class="medCard">
         <ion-card-header>
-          <ion-card-title> {{ remedio }}</ion-card-title>
+          <ion-card-title> {{ remedio }} </ion-card-title>
         </ion-card-header>
-        <ion-card-content mode="ios">
-          2 Dosis Cada 12 horas
-        </ion-card-content>
+        <ion-card-content mode="ios"> {{ dosis }} </ion-card-content>
       </ion-card>
     </div>
 

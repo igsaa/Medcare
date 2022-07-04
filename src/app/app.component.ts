@@ -17,5 +17,4 @@ export class AppComponent {
     console.log("\nDatos borrados con éxito")
     this.router.navigateByUrl('/', { replaceUrl: true })
   }
-
 }
