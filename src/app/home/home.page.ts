@@ -3,7 +3,6 @@ import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { DbService } from '../services/db.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -15,7 +14,8 @@ export class HomePage {
   public pass: string = '';
   listData = [];
 
-  constructor(public toastController: ToastController, private router: Router, private dbservice: DbService, private menuCtrl: MenuController) {}
+  constructor(public toastController: ToastController, private router: Router, private dbservice: DbService, private menuCtrl: MenuController) {
+  }
 
   ionViewWillEnter(){
     this.menuCtrl.enable(false);
@@ -49,7 +49,7 @@ export class HomePage {
     toast.present();
   }
   
-  async successToast(rut) {
+  async successToast() {
     const toast = await this.toastController.create({
       message: 'Sesion iniciada',
       duration: 2000,
@@ -59,7 +59,7 @@ export class HomePage {
       icon: 'checkmark-circle-outline'
     });
     toast.present();
-    this.router.navigate(['start', rut]);
+    this.router.navigateByUrl('/start', { replaceUrl: true });
   }
 
   logear(){
@@ -70,8 +70,10 @@ export class HomePage {
       this.dbservice.consultarDatosLogin(this.rut, this.pass, this.dbservice.database)
     .then((data) => {
       if(data){
-        this.successToast(this.rut);
-      }
+        this.dbservice.guardarDatos(this.rut).then(() => {
+          this.successToast();
+        })
+      }      
       else{
         this.failAuth();
       }

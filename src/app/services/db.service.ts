@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Platform } from '@ionic/angular';
+import { Storage } from '@capacitor/storage';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,11 @@ import { Platform } from '@ionic/angular';
 
 export class DbService {
   database: SQLiteObject;
+  storage = Storage;
   isReady: boolean;
   array_usuario_login: any = [];
-  array_usuarios: any = [];
-  array_doctores: any = [];
+  public array_usuarios: any = [];
+  public array_doctores: any = [];
   verificar_usuario_correcto: boolean;
   readonly database_name: string = "medcare.db";
   tables = {
@@ -94,7 +97,7 @@ export class DbService {
             pass: data.rows.item(i).pass
           });
         }
-        if (this.array_usuario_login.map(usuario => usuario.rut) == rut &&
+        if (this.array_usuario_login.map(usuario => usuario.rut) == rut && 
         this.array_usuario_login.map(usuario => usuario.pass) == pass){
           this.verificar_usuario_correcto = true;
           resolve(this.verificar_usuario_correcto);
@@ -115,11 +118,6 @@ export class DbService {
 
   datosUsuario(rut: any) {
     return new Promise((resolve) => {
-    /* this.database.executeSql(
-      `SELECT * FROM ${this.tables.usuario} u
-      JOIN ${this.tables.doctor} d
-      ON u.id_doctor = d.id_doctor
-      WHERE rut = ?`,[rut]) */
       return this.database.executeSql(`SELECT * FROM ${this.tables.usuario} WHERE rut = ?`,[rut])
       .then((data) => {
         this.array_usuarios = [];
@@ -145,37 +143,42 @@ export class DbService {
       })
       .catch(e => {
         alert("error " + JSON.stringify(e))
-      });
+      })
     });
   }
 
-  datosDoctor(rut: any, pass: any, db: SQLiteObject){
+  guardarDatos(rut: any){
     return new Promise((resolve) => {
-      return db.executeSql(`SELECT * FROM ${this.tables.usuario} WHERE rut = ?`, [rut])
-    .then((data) => {
-      this.array_usuarios = [];
-      if (data.rows.length > 0) {
-        for (var i = 0; i < data.rows.length; i++) {
-          this.array_usuarios.push({
-            rut: data.rows.item(i).rut,
-            pass: data.rows.item(i).pass
-          });
+      this.datosUsuario(rut)
+      .then(async (array) => {
+        await this.storage.set({key: 'usuario', value: JSON.stringify(array)})
+        resolve('\nDatos guardados con éxito')
+      })
+    })
+  }
+
+  datosDoctor(id: any) {
+    return new Promise((resolve) => {
+      return this.database.executeSql(`SELECT * FROM ${this.tables.doctor} WHERE id_doctor = ?`,[id])
+      .then((data) => {
+        this.array_doctores = [];
+        if (data.rows.length > 0) {
+          for (var i = 0; i < data.rows.length; i++) {
+            this.array_doctores.push({
+              nombre: data.rows.item(i).nombre,
+              apellido: data.rows.item(i).apellido,
+              especialidad: data.rows.item(i).especialidad,
+              email: data.rows.item(i).email
+            });
+          }
+          resolve(this.array_doctores);
+        }else{
+          resolve(this.array_doctores);
         }
-        if (this.array_usuarios.map(usuario => usuario.rut) == rut &&
-        this.array_usuarios.map(usuario => usuario.pass) == pass){
-          this.verificar_usuario_correcto = true;
-          resolve(this.verificar_usuario_correcto);
-        }
-        else{
-          this.verificar_usuario_correcto = false;
-          resolve(this.verificar_usuario_correcto);
-        }
-      }else{
-        alert(`Usuario o Contraseña incorrectos`)
-      }
-    }).catch(e => {
-      alert("error datosDoctor() 1er if" + JSON.stringify(e))
-    });
+      })
+      .catch(e => {
+        alert("error " + JSON.stringify(e))
+      });
     });
   }
 

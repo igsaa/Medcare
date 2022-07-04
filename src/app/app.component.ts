@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Storage } from '@capacitor/storage';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  storage = Storage;
+
+  constructor(private router: Router) {}
+  
+  async cerrarSesion(){
+    await this.storage.remove({key:'usuario'})
+    console.log("\nDatos borrados con éxito")
+    this.router.navigateByUrl('/', { replaceUrl: true })
+  }
+
 }

@@ -1,34 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { MyModalPage } from '../my-modal/my-modal.page';
 import { ModalController } from '@ionic/angular';
-import { HomePage } from '../home/home.page';
 import { DbService } from '../services/db.service';
 import { ActivatedRoute } from '@angular/router';
+import { Storage } from '@capacitor/storage';
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.page.html',
   styleUrls: ['./start.page.scss'],
 })
-export class StartPage implements OnInit {
-  homepage: any;
-  listData = [];
-  name: '';
-  meds: '';
-  today: '';
+export class StartPage{
+  storage = Storage;
+  array_usuarios = [];
+  nombre: any;
+  remedio: any;
+  today: any;
 
   constructor(private dbservice: DbService, private modalCtrl: ModalController, private route: ActivatedRoute) {
-    this.homepage = HomePage;
-    this.route.params.subscribe(rut => {
-      this.llenarNombre(rut.rut);
-    })
+    try{
+      this.llenarDatos()
+    }
+    catch(e){
+        console.log("TRY CATCH DEL START PAGE: " + e)
+    }
   }
-
-  llenarNombre(rut){
-    this.dbservice.datosUsuario(rut).then((array: any) => {
-      this.name = array.map(user => user.nombre.toUpperCase());
-      this.meds = array.map(user => user.remedio.toUpperCase());
-    })
+  
+  async llenarDatos(){
+      this.array_usuarios = [];
+      await this.storage.get({key: 'usuario'}).then((array) => {this.array_usuarios = JSON.parse(array.value)})
+      .then(() => {
+        this.nombre = this.array_usuarios.map(usuario => usuario.nombre)
+        this.remedio = this.array_usuarios.map(usuario => usuario.remedio)
+      })
   }
 
   async openModal(){
@@ -38,10 +42,5 @@ export class StartPage implements OnInit {
     });
 
     await modal.present();
-  }
-
-  ngOnInit() {
-    //const now = new Date();
-    //this.today = now.toISOString();
   }
 }
