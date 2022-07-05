@@ -67,7 +67,7 @@ export class HomePage {
       this.emptyToast();
     }
     else{
-      this.dbservice.consultarDatosLogin(this.rut, this.pass, this.dbservice.database)
+      this.dbservice.consultarDatosLogin(this.rut, this.pass, this.dbservice.dbObject)
     .then((data) => {
       if(data){
         this.dbservice.guardarDatos(this.rut).then(() => {

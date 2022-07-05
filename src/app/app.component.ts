@@ -14,7 +14,23 @@ export class AppComponent {
   
   async cerrarSesion(){
     await this.storage.remove({key:'usuario'})
-    console.log("\nDatos borrados con éxito")
-    this.router.navigateByUrl('/', { replaceUrl: true })
+    .then(async () => {await this.storage.remove({key:'doctor'})})
+    .then(() => {
+      console.log("\nDatos borrados con éxito")
+      this.router.navigateByUrl('/', { replaceUrl: true })
+    })
   }
+
+  toStart(){
+    this.router.navigate(['/start'], { replaceUrl: true });
+  }
+
+  toProfile(){
+    this.router.navigate(['/profile'], { replaceUrl: true });
+  }
+
+  toMyData(){
+    this.router.navigate(['/my-data'], { replaceUrl: true });
+  }
+
 }

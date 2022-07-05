@@ -14,18 +14,18 @@
     <div class="form">
       <div class="phone">
         <label for="">Teléfono</label>
-        <input type="text" value="{{ telefono }}">
+        <input [(ngModel)]="telefono" value="{{ telefono }}">
       </div>
       <div class="email">
         <label for="">Email</label>
-        <input type="text" value="{{ email }}">
+        <input type="email" [(ngModel)]="email" value="{{ email }}">
       </div>
       <div class="address">
         <label for="">Dirección</label>
-        <input type="text" value="{{ direccion }}">
+        <input [(ngModel)]="direccion" value="{{ direccion }}">
       </div>
       <div class="save">
-        <ion-button class="button-save" shape="round" color="tertiary"><ion-icon name="save-outline"></ion-icon> Guardar</ion-button>
+        <ion-button (click)="guardarDatos()" class="button-save" shape="round" color="tertiary"><ion-icon name="save-outline"></ion-icon>Guardar</ion-button>
       </div>
     </div>
   </div>

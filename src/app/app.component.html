@@ -8,19 +8,19 @@
     <ion-content>
       <ion-list class="list-menu">
         <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="/start">
+          <ion-item (click)="toStart()">
              <ion-icon name="home" slot="start"></ion-icon>
              <ion-label>Inicio</ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="/profile" >
+          <ion-item (click)="toProfile()" >
             <ion-icon name="medical" slot="start" color="danger"></ion-icon>
             <ion-label>Perfil Médico</ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="/my-data">
+          <ion-item (click)="toMyData()">
             <ion-icon name="document-text" slot="start"></ion-icon>
             <ion-label>Datos de contacto</ion-label>
           </ion-item>
