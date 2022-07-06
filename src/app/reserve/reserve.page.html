@@ -20,7 +20,7 @@
 
       <div class="calendar">
         <ion-datetime class="dates" presentation="date" first-day-of-week="1" color="tertiary"
-        #datetime (ionChange)="dateSelected(datetime.value)" [(ngModel)]="selectedDate" [min]="minDate">
+        #datetime (ngModelChange)="dateSelected(datetime.value)" [(ngModel)]="selectedDate" [min]="minDate" [isDateEnabled]="isWeekday">
           <div slot="title">Seleccione fecha</div>
         </ion-datetime>
       </div>
