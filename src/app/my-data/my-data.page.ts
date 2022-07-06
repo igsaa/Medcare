@@ -13,10 +13,11 @@ import { Router } from '@angular/router';
 export class MyDataPage{
   storage = Storage;
   array_usuarios: any = [];
-  rut: any;
-  telefono: any;
-  email: any;
-  direccion: any;
+  rut: string = "";
+  telefono: string = "";
+  email: string = "";
+  direccion: string = "";
+  validacion: boolean;
 
   constructor(private dbservice: DbService, public toastController: ToastController, private router: Router) {
     try{
@@ -38,29 +39,36 @@ export class MyDataPage{
     })
   }
 
-  guardarDatos(){
-    if(this.telefono.length == 9){
-      if(this.email.length > 4){
-        if(this.direccion.length > 0){
-          this.dbservice.updateDatos(this.rut, this.telefono ,this.email, this.direccion)
-          .then(async () => {
-            await this.storage.remove({key:'usuario'})
-            await this.storage.remove({key:'doctor'})
-            await this.dbservice.guardarDatos(this.rut)
-          })
-          .then(() => {
-            this.datosGuardadosConExito();
-          })        
-        }else{
-          alert('debes ingresar una dirección')
-        }
-      }else{
-        alert('debes ingresar un email válido')
-      }   
-    }else{
-      alert('debes ingresar un número de teléfono válido (Ej. 123456789)')
+  async guardarDatos(){
+    let datos_faltantes = "";
+    this.validacion = true;
+      if(this.telefono.toString().length != 9){
+        this.validacion = false;
+        datos_faltantes = "Telefono debe tener 9 dígitos (Ej: 123456789)<br/>"
+        this.datosFaltantes(datos_faltantes)
+      }
+      if(this.email.toString().length <= 4){
+        this.validacion = false;
+        datos_faltantes += "Email inválido<br/>"        
+        this.datosFaltantes(datos_faltantes)
+      }
+      if(this.direccion.toString().length <= 0){
+        this.validacion = false;
+        datos_faltantes += "Ingrese una dirección"
+        this.datosFaltantes(datos_faltantes)
+      }
+    if(this.validacion){
+      await this.dbservice.updateDatos(this.rut, this.telefono ,this.email, this.direccion)
+      .then(async () => {
+        await this.storage.remove({key:'usuario'})
+        await this.storage.remove({key:'doctor'})
+        await this.dbservice.guardarDatos(this.rut)
+      })
+      .then(() => {
+        this.datosGuardadosConExito();
+      })
     }
-  }
+  }  
 
   async datosGuardadosConExito() {
     const toast = await this.toastController.create({
@@ -73,6 +81,18 @@ export class MyDataPage{
     });
     toast.present();
     this.router.navigateByUrl('/my-data', { replaceUrl: true });
+  }
+
+  async datosFaltantes(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 4500,
+      color: 'danger',
+      position: 'top',
+      cssClass: 'toast-crear',
+      icon: 'alert-circle-outline'
+    });
+    toast.present();
   }
 
 }
