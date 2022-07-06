@@ -15,12 +15,15 @@
       <ion-label class="alarm">Alarmas</ion-label>
     </div>
     <ion-list class="lista">
-      <ion-item>
-        <ion-label>{{hora}}</ion-label>
+      <ion-item *ngFor="let item of alarma; let i=index">
+        <ion-button slot="end" fill="clear" shape="round" (click)="getIndex(i)">
+          <ion-icon name="trash-outline" color="danger"></ion-icon>
+        </ion-button>
+        {{item.hora}}:{{item.minutos}}
       </ion-item>
     </ion-list>
     <div class="add">
-      <ion-fab vertical="center" horizontal="end" slot="fixed">
+      <ion-fab vertical="end" horizontal="end" slot="fixed">
         <ion-fab-button (click)="openTime()">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>

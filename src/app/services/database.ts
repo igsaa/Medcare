@@ -17,8 +17,8 @@ export class Database{
         email VARCHAR(50)
     );`)
     return this.createTableDoctor;
-  }    
-
+  }
+  
   getCreateTableUsuario(){
     this.createTableUsuario = JSON.stringify(`
     CREATE TABLE IF NOT EXISTS usuario(

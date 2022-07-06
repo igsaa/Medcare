@@ -10,11 +10,11 @@
 
 <ion-content [fullscreen]="true">
   <div class="pick">
-    <ion-datetime presentation="time" hour-cycle="h23" #time (ionChange)="timeSelected(time.value)"></ion-datetime>
+    <ion-datetime presentation="time" hour-cycle="h23" #time></ion-datetime>
   </div>
   <div class="buttons">
-    <ion-button (click)="dismiss()">Cancelar</ion-button>
-    <ion-button (click)="timeSelected(time.value)" (click)="aceptarBtn()" (click)="dismiss()">Aceptar</ion-button>
+    <ion-button (click)="clear()">Cancelar</ion-button>
+    <ion-button (click)="timeSelected(time.value)" (click)="llenarAlarma()" (click)="dismiss()">Aceptar</ion-button>
   </div>
 </ion-content>
 

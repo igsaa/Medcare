@@ -1,23 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { ModalController } from '@ionic/angular';
 import { AlarmModalPage } from '../alarm-modal/alarm-modal.page'; 
-import { ActivatedRoute } from "@angular/router";
+import { Storage } from '@capacitor/storage';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alarm',
   templateUrl: './alarm.page.html',
   styleUrls: ['./alarm.page.scss'],
 })
-export class AlarmPage implements OnInit {
-  hora: any;
-  constructor(private modalCtrl: ModalController, private route: ActivatedRoute) { 
-    this.route.params.subscribe(params => {
-      this.hora = params.hora;
-    })
+export class AlarmPage implements OnInit{
+  storage = Storage;
+  alarma: any[];
+  index:any;
+  constructor(private modalCtrl: ModalController, private alert: AlertController) { 
   }
-  ngOnInit() {
 
+  ngOnInit() {
+    this.llenarAlarma();
+  }
+
+  async llenarAlarma(){
+    await this.storage.get({key: 'alarma'}).then((array) => {this.alarma = JSON.parse(array.value)})
   }
 
   async notificationModel(){
@@ -29,6 +34,11 @@ export class AlarmPage implements OnInit {
         sound: 'beep.wav'
       }]
     });
+  }
+
+  getIndex(index){
+    this.index = index;
+    console.log(this.index)
   }
 
   async notificationModelDate(){
@@ -53,6 +63,25 @@ export class AlarmPage implements OnInit {
 
   openTime(){
     this.openModal();
+  }
+
+  async presentAlert() {
+    const alert = await this.alert.create({
+      header: 'Deseas eliminar esta alarma?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          cssClass: 'alert-button-cancel',
+          handler: () => {}
+        },
+        {
+          text: 'Yes',
+          cssClass: 'alert-button-confirm',
+          handler: () => {this.storage.remove({key:'alarma'});}
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

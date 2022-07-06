@@ -12,7 +12,6 @@ import { Storage } from '@capacitor/storage';
 export class StartPage{
   storage = Storage;
   array_usuario: any = [];
-  array_doctor: any = [];
   nombre: any;
   remedio: any;
   dosis: any;
@@ -51,7 +50,6 @@ export class StartPage{
 
   async llenarDatos(){
       this.array_usuario = [];
-      this.array_doctor = [];
       await this.storage.get({key: 'usuario'}).then((array) => {this.array_usuario = JSON.parse(array.value)})
       .then(() => {
         this.nombre = this.array_usuario.map(usuario => usuario.nombre)

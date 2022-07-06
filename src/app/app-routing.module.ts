@@ -32,10 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./alarm/alarm.module').then( m => m.AlarmPageModule)
   },
   {
-    path: 'alarm/:hora',
-    loadChildren: () => import('./alarm/alarm.module').then( m => m.AlarmPageModule)
-  },
-  {
     path: 'alarm-modal',
     loadChildren: () => import('./alarm-modal/alarm-modal.module').then( m => m.AlarmModalPageModule)
   },
