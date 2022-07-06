@@ -35,6 +35,12 @@ export class ReservePage implements OnInit {
     await modal.present();
   }
 
+//desactiva fin de semana
+  isWeekday = (dateString: string) => {
+    const date = new Date(dateString);
+    const utcDay = date.getUTCDay();
+    return utcDay !== 0;
+  };
 
   dateSelected(value) {
     this.dateFormattedString = format(parseISO(value), 'MMM d, yyyy', {locale: es});
