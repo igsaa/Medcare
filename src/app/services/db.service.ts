@@ -18,27 +18,34 @@ export class DbService {
   verificar_usuario_correcto: boolean;
 
   constructor(private sqlite: SQLite) {
-    this.getDatabase_IsReady().then(()=>{
+    this.getDatabase_IsReady().then(async ()=>{
       if(this.database_isReady != 'true'){
         this.sqlite = new SQLite();
-        this.sqlite.create({
-          name: 'medcare.db',
-          location: 'default'
-        }).then(async (db: SQLiteObject)=>{
-          this.dbObject = db;
-          await this.createTables(db, this.database.getCreateTableDoctor());
-          await this.createTables(db, this.database.getCreateTableUsuario());
-          await this.insertIntos(db, this.database.getInsertIntoDoctor());
-          await this.insertIntos(db, this.database.getInsertIntoUsuario());
+        await this.setDatabase().then(async ()=>{
+          await this.createTables(this.dbObject, this.database.getCreateTableDoctor());
+          await this.createTables(this.dbObject, this.database.getCreateTableUsuario());
+          await this.insertIntos(this.dbObject, this.database.getInsertIntoDoctor());
+          await this.insertIntos(this.dbObject, this.database.getInsertIntoUsuario());
           console.log('\nBase de datos creada correctamente')
-          await this.setDatabase_IsReady('true')
+          await this.setDatabase_IsReady('true')          
         }).catch((e)=>{
           alert(e)
         })
       }else{
+        await this.setDatabase()
         console.log('\nLa base de datos ya fue creada en el dispositivo')
       }
     });
+  }
+
+  //Método que crea / abre la base de datos
+  async setDatabase(){
+    await this.sqlite.create({
+      name: 'medcare.db',
+      location: 'default'
+    }).then(async (db: SQLiteObject)=>{
+      this.dbObject = db;
+    })
   }
   
   //Método que asigna isReady para la comprobación en la inicialización del servicio
