@@ -19,7 +19,7 @@ export class AppComponent {
     .then(async () => {await this.storage.remove({key:'alarma'})})
     .then(() => {
       console.log("\nDatos borrados con éxito")
-      this.router.navigateByUrl('/', { replaceUrl: true })
+      this.router.navigateByUrl('/login', { replaceUrl: true })
     })
   }
 

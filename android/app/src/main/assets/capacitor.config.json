@@ -2,12 +2,5 @@
 	"appId": "io.ionic.starter",
 	"appName": "MedCare",
 	"webDir": "www",
-	"bundledWebRuntime": false,
-	"server": {
-<<<<<<< HEAD
-		"url": "http://192.168.100.3:8100"
-=======
-		"url": "http://192.168.1.83:8100"
->>>>>>> c9546de426a8060d6f02e92d90628470dc94a133
-	}
+	"bundledWebRuntime": false
 }

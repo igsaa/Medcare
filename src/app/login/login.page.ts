@@ -14,8 +14,7 @@ export class LoginPage {
   public pass: string = '';
   listData = [];
 
-  constructor(public toastController: ToastController, private router: Router, private dbservice: DbService, private menuCtrl: MenuController) {
-  }
+  constructor(public toastController: ToastController, private router: Router, private dbservice: DbService, private menuCtrl: MenuController) {}
 
   ionViewWillEnter(){
     this.menuCtrl.enable(false);
