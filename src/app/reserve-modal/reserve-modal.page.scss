@@ -26,6 +26,17 @@ ion-toolbar {
   color: white;
 }
 
+.btn{
+  text-align: center;
+  position: fixed;
+  padding-left: 15vw;
+  bottom: 10px;
+}
+
+.btn-time{
+  display: inline-block;
+}
+
 ion-content{
     --background: white  !important;
   }

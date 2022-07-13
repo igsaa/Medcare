@@ -3,6 +3,9 @@
   <ion-datetime #time (ionChange)="actualizarHora(time.value)" presentation="time" hour-cycle="h23" [hourValues]="hourValues" [minuteValues]="minutesValues"></ion-datetime>
   <h3> Fecha seleccionada </h3>
   <div>{{ fechaSeleccionada }} - {{ horaSeleccionada }}</div><br>
-  <ion-button color="secondary" (click)="dismiss()" >Volver </ion-button>
-  <ion-button color="secondary" (click)="btnAceptar(time.value)">Aceptar </ion-button>
+  <div class="btn">
+    <ion-button class="btn-time" color="secondary" (click)="dismiss()" >Volver </ion-button>
+    <ion-button class="btn-time" color="secondary" (click)="btnAceptar(time.value)">Aceptar </ion-button>
+  </div>
+
 </ion-content>

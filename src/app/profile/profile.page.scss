@@ -26,16 +26,21 @@
 }
 
 .medico{
-  width: 50%;
-  margin: auto;
+  height: 10vh;
+  width: 100%;
 
   img{
-    border-radius: 20%;
+    height: 100%;
+    padding: 0 2vw;
+    float: left;
   }
 }
 
-.docName{
-  text-align: center;
+.docData{
+  //text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
   font-family: Roboto400;
 }
 
@@ -44,15 +49,15 @@
   width: 80%;
   height: 300px;
   margin:auto;
-  background-color: rgb(70, 52, 226);
+  //background-color: rgb(70, 52, 226);
   border-radius: 10px;
 }
 
-.card{
+/*.card{
   width: 80%;
   height: 300px;
   margin: auto;
-}
+}*/
 
 .card-title{
   font-size: 1.1rem;
@@ -64,4 +69,5 @@
   font-size: 1rem;
   font-family: Roboto400;
   color: black;
+  padding: 10px 10px 10px 0;
 }
