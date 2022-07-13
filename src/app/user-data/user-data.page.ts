@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 
 export class UserDataPage{
   storage = Storage;
+  emailReg =  /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  adressReg = /[A-Za-z0-9_\-\., ]+\ +[0-9]/;
   array_usuarios: any = [];
   rut: string = "";
   telefono: string = "";
@@ -47,14 +49,14 @@ export class UserDataPage{
         datos_faltantes = "Telefono debe tener 9 dígitos (Ej: 123456789)<br/>"
         this.datosFaltantes(datos_faltantes)
       }
-      if(this.email.toString().length <= 4){
+      if(!this.emailReg.test(this.email.toString())){
         this.validacion = false;
         datos_faltantes += "Email inválido<br/>"        
         this.datosFaltantes(datos_faltantes)
       }
-      if(this.direccion.toString().length <= 0){
+      if(!this.adressReg.test(this.direccion.toString())){
         this.validacion = false;
-        datos_faltantes += "Ingrese una dirección"
+        datos_faltantes += "Ingrese una dirección válida (Ej: calle 123)"
         this.datosFaltantes(datos_faltantes)
       }
     if(this.validacion){
@@ -80,7 +82,7 @@ export class UserDataPage{
       icon: 'checkmark-circle-outline'
     });
     toast.present();
-    this.router.navigateByUrl('/my-data', { replaceUrl: true });
+    this.router.navigateByUrl('/user-data', { replaceUrl: true });
   }
 
   async datosFaltantes(message: string) {

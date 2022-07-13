@@ -50,7 +50,7 @@ export class Database{
     ('18879839-k', '123456', 'Alan', 'Moscoso', 100, 185, 28, 'O-', '962217128', 'José Donoso 11003', 'ala.moscoso@duocuc.cl', 'Asma', 'Salbutamol', '2 dosis cada 2 días', 3),
     ('19035108-4', '123456', 'Ignacio', 'Saavedra', 90, 180, 27, 'AB+', '979127147', 'Pericles 747', 'ig.saavedra@duocuc.cl', 'Hipertensión', 'Lisinopril 50mg.', '1/2 Pastilla al día', 2),
     ('14568914-7', '123456', 'Diego', 'Ramiro', 65, 140, 42, 'AB-', '989128634', 'Macul 5689', 'dieg.ramiro@duocuc.cl', 'Cirrosis', 'Amiodarona 200mg.', '2 pastillas cada 8 horas', 4),
-    ('asd', 'asd', 'Nombre asd', 'Apellido asd', 1, 1, 1, '1+', '123456789', 'calle falsa 1234', 'asd.asd@asd.asd', 'ASD', 'asd', 'asd pastillas todas las mañanas', 1);`
+    ('asd', 'asd', 'Nombre asd', 'Apellido asd', 1, 1, 1, '1+', '123456789', 'calle falsa 1234', 'asd.asd@asd.asd', 'Asd', 'asd', 'asd pastillas todas las mañanas', 1);`
     )
     return this.insertIntoDoctor;
   }

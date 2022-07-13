@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ReserveModalPage } from '../reserve-modal/reserve-modal.page';
 import { ModalController } from '@ionic/angular';
-import { DbService } from '../services/db.service';
 import { Storage } from '@capacitor/storage';
 import { Router } from '@angular/router';
 
@@ -20,7 +19,7 @@ export class HomePage{
   today_nombre: any;
   today_numero: any;
 
-  constructor(private dbservice: DbService, private modalCtrl: ModalController, private router: Router) {
+  constructor(private modalCtrl: ModalController, private router: Router) {
     try{
       this.llenarDatos()
       this.llenarDia(this.date)
@@ -58,7 +57,6 @@ export class HomePage{
   } 
 
   async llenarDatos(){
-      this.array_usuario = [];
       await this.storage.get({key: 'usuario'}).then((array) => {this.array_usuario = JSON.parse(array.value)})
       .then(() => {
         this.nombre = this.array_usuario.map(usuario => usuario.nombre)

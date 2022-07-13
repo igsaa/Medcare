@@ -14,7 +14,11 @@
   <div class="contenido">
     <div class="medico">
       <img class="imgMed" src="../../assets/img/doc.png" alt="">
-      <p class="docData">Dr. {{ nombredoctor }} <br> {{ centroMed }} </p>
+      <p class="docData">
+        Dr. {{ nombre_doctor }}<br>
+        {{ especialidad_doctor }}<br>
+        {{ centroMed }}
+      </p>
     </div>
     <div class="ficha">
       <ion-card class="card" mode="ios">
@@ -23,13 +27,13 @@
         </ion-card-header>
         <ion-card-content mode="ios" class="card-content">
           <ul>
-            <li>Peso: {{ peso }} kg.</li>
-            <li>Altura: {{ altura }} mts.</li>
-            <li>Edad: {{ edad }} años</li>
-            <li>Factor RH: {{ rh }}</li>
-            <li>Enfermedad: {{ enfermedad }}</li>
-            <li>Tratamiento: {{ tratamiento }}</li>
-            <li>Dosis: {{ dosis }}</li>
+            <li>Peso: {{ peso_usuario }} kg.</li>
+            <li>Altura: {{ altura_usuario }} mts.</li>
+            <li>Edad: {{ edad_usuario }} años</li>
+            <li>Factor RH: {{ rh_usuario }}</li>
+            <li>Enfermedad: {{ enfermedad_usuario }}</li>
+            <li>Tratamiento: {{ remedio_usuario }}</li>
+            <li>Dosis: {{ dosis_usuario }}</li>
           </ul>
         </ion-card-content>
       </ion-card>
