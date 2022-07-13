@@ -41,6 +41,7 @@ export class Database{
     );`)
     return this.createTableUsuario;
   }
+
   getInsertIntoDoctor(){
     this.insertIntoDoctor = JSON.stringify(`INSERT INTO usuario
     (rut, pass, nombre, apellido, peso, altura, edad, factor_rh, telefono, direccion, email, enfermedad, remedio, dosis, id_doctor)
@@ -53,6 +54,7 @@ export class Database{
     )
     return this.insertIntoDoctor;
   }
+  
   getInsertIntoUsuario(){
     this.insertIntoUsuario = JSON.stringify(`INSERT INTO doctor
       (id_doctor, nombre, apellido, especialidad, email)

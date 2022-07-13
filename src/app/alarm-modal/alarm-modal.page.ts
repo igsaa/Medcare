@@ -33,7 +33,7 @@ export class AlarmModalPage implements OnInit {
         this.alarma = JSON.parse(array.value)
       }
     })
-    console.log('alarma: '+this.alarma);
+    console.log('alarma: ' + this.alarma);
   }
 
   async setAlarma(hora){
@@ -49,11 +49,6 @@ export class AlarmModalPage implements OnInit {
     this.alarma.push({hora: this.timeFormattedString.split(':')[0], minutos: this.timeFormattedString.split(':')[1]});
     console.log('Hora ' + this.alarma[0].hora + ':' +this.alarma[0].minutos);
     this.setAlarma(this.alarma);
-  }
-
-
-  clear(){
-    this.storage.clear();
   }
 
 }

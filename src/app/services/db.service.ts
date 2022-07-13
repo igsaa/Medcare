@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-import { Platform } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
 import { Database } from './database';
-
 
 @Injectable({
   providedIn: 'root'
@@ -13,40 +11,60 @@ export class DbService {
   dbObject: SQLiteObject;
   database: Database = new Database();
   storage = Storage;
-  isReady: boolean;
+  database_isReady = '';
   array_usuario_login: any = [];
   public array_usuarios: any = [];
   public array_doctores: any = [];
   verificar_usuario_correcto: boolean;
 
-  constructor(private sqlite: SQLite, private platform: Platform) {
-    if(!this.isReady){
-      this.sqlite = new SQLite();
-      this.sqlite.create({
-        name: 'medcare.db',
-        location: 'default'
-      }).then((db: SQLiteObject)=>{
-        this.dbObject = db;
-        this.createTables(db, this.database.getCreateTableDoctor());
-        this.createTables(db, this.database.getCreateTableUsuario());
-        this.insertIntos(db, this.database.getInsertIntoDoctor());
-        this.insertIntos(db, this.database.getInsertIntoUsuario());
-      }).catch((e)=>{
-        alert(e)
+  constructor(private sqlite: SQLite) {
+    this.getDatabase_IsReady().then(()=>{
+      if(this.database_isReady != 'true'){
+        this.sqlite = new SQLite();
+        this.sqlite.create({
+          name: 'medcare.db',
+          location: 'default'
+        }).then(async (db: SQLiteObject)=>{
+          this.dbObject = db;
+          await this.createTables(db, this.database.getCreateTableDoctor());
+          await this.createTables(db, this.database.getCreateTableUsuario());
+          await this.insertIntos(db, this.database.getInsertIntoDoctor());
+          await this.insertIntos(db, this.database.getInsertIntoUsuario());
+          console.log('\nBase de datos creada correctamente')
+          await this.setDatabase_IsReady('true')
+        }).catch((e)=>{
+          alert(e)
+        })
+      }else{
+        console.log('\nLa base de datos ya fue creada en el dispositivo')
+      }
+    });
+  }
+  
+  //Método que asigna isReady para la comprobación en la inicialización del servicio
+  async getDatabase_IsReady(){
+      await this.storage.get({key: 'database_isReady'})
+      .then((data) => {
+        this.database_isReady = data.value;
       })
-    }
+  }
+
+  //Método que reemplaza isReady con el valor otorgado para la comprobación en la inicialización del servicio
+  async setDatabase_IsReady(value: any){
+    await this.storage.remove({key: 'database_isReady'})
+    await this.storage.set({key: 'database_isReady', value: value})
   }
 
   //Este método ejecuta las funciones para crear las tablas de la base de datos
-  createTables(db: SQLiteObject, createTable: any) {
-    db.executeSql(JSON.parse(createTable), []).catch(e => {
+  async createTables(db: SQLiteObject, createTable: any) {
+     await db.executeSql(JSON.parse(createTable), []).catch(e => {
         alert(`error createTables(): ` + JSON.stringify(e))
     });
   }
 
   //Este método ejecuta las funciones para insertar los datos dentro de las tablas de la base de datos
-  insertIntos(db: SQLiteObject, insertInto){
-    db.executeSql(JSON.parse(insertInto), [])
+  async insertIntos(db: SQLiteObject, insertInto){
+    await db.executeSql(JSON.parse(insertInto), [])
       .catch(e => {});
   }
 
