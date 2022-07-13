@@ -26,7 +26,7 @@
           <ion-card-title class="card-title">Ficha paciente</ion-card-title>
         </ion-card-header>
         <ion-card-content mode="ios" class="card-content">
-          <ul>
+          <!--<ul>
             <li>Peso: {{ peso_usuario }} kg.</li>
             <li>Altura: {{ altura_usuario }} mts.</li>
             <li>Edad: {{ edad_usuario }} años</li>
@@ -34,7 +34,49 @@
             <li>Enfermedad: {{ enfermedad_usuario }}</li>
             <li>Tratamiento: {{ remedio_usuario }}</li>
             <li>Dosis: {{ dosis_usuario }}</li>
-          </ul>
+          </ul>-->
+            <ion-item>
+              <ion-label>
+                <p>Peso</p>
+                <h2>{{ peso_usuario }} kg.</h2>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <p>Altura</p>
+                <h2>{{ altura_usuario }} mts.</h2>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <p>Edad</p>
+                <h2>{{ edad_usuario }} años</h2>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <p>Factor RH</p>
+                <h2>{{ rh_usuario }}</h2>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <p>Enfermedad</p>
+                <h2>{{ enfermedad_usuario }}</h2>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <p>Tratamiento</p>
+                <h2>{{ remedio_usuario }}</h2>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <p>Dosis</p>
+                <h2>{{ dosis_usuario }}</h2>
+              </ion-label>
+            </ion-item>
         </ion-card-content>
       </ion-card>
     </div>
