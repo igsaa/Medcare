@@ -5,12 +5,12 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-my-data',
-  templateUrl: './my-data.page.html',
-  styleUrls: ['./my-data.page.scss'],
+  selector: 'app-user-data',
+  templateUrl: './user-data.page.html',
+  styleUrls: ['./user-data.page.scss'],
 })
 
-export class MyDataPage{
+export class UserDataPage{
   storage = Storage;
   array_usuarios: any = [];
   rut: string = "";

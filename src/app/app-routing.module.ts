@@ -4,16 +4,16 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'start',
-    loadChildren: () => import('./start/start.module').then( m => m.StartPageModule)
   },
   {
     path: 'reserve',
@@ -24,16 +24,12 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'my-data',
-    loadChildren: () => import('./my-data/my-data.module').then( m => m.MyDataPageModule)
+    path: 'user-data',
+    loadChildren: () => import('./user-data/user-data.module').then( m => m.UserDataPageModule)
   },
   {
     path: 'alarm',
     loadChildren: () => import('./alarm/alarm.module').then( m => m.AlarmPageModule)
-  },
-  {
-    path: 'alarm-modal',
-    loadChildren: () => import('./alarm-modal/alarm-modal.module').then( m => m.AlarmModalPageModule)
   },
 ];
 

@@ -1,0 +1,30 @@
+
+<ion-content [fullscreen]="true" style="text-align:center">
+
+	<div class="cont">
+    <div class="div-logo">
+      <img src="assets/Vector.svg" class="logo">
+    </div>
+
+    <div class="div-nombre">
+      <ion-text>
+        <h1 class="nombre-titulo" style="font-size:40px">MedCare</h1>
+      </ion-text>
+    </div>
+
+    <ion-item class="form-login" color="light">
+      <ion-label position="floating">RUT</ion-label>
+      <ion-input [(ngModel)]="rut"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-login" color="light">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input (keyup.enter)="logear()" type="password" [(ngModel)]="pass"></ion-input>
+    </ion-item>
+
+    <div>
+      <ion-button (click)="logear()" class="btn-login"  shape="round" size="default" color="tertiary">Entrar</ion-button>
+    </div>
+
+</div>
+</ion-content>

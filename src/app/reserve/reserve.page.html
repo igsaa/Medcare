@@ -13,19 +13,15 @@
 
   <div class="content">
     <div class="title-div">
-      <button type="button" class="button-back" routerLink="/start"><ion-icon name="chevron-back-outline"></ion-icon> </button>
       <h1 class="title"> Reserva de horas </h1>
     </div>
-
-
-      <div class="calendar">
-        <ion-datetime class="dates" presentation="date" first-day-of-week="1" color="tertiary"
-        #datetime (ngModelChange)="dateSelected(datetime.value)" [(ngModel)]="selectedDate" [min]="minDate" [isDateEnabled]="isWeekday">
-          <div slot="title">Seleccione fecha</div>
-        </ion-datetime>
-      </div>
-
-
-
+    <div class="calendar">
+      <ion-datetime locale="es-ES" class="dates" presentation="date" first-day-of-week="1" color="tertiary"
+      #datetime (ngModelChange)="dateSelected(datetime.value)" [(ngModel)]="selectedDate" [min]="minDate" [isDateEnabled]="notSunday">
+        <div slot="title">Seleccione fecha</div>
+      </ion-datetime>
+    </div>
+    <h2>Fecha Reservada</h2>
+    <div>{{ horaMedica }}</div>
   </div>
 </ion-content>

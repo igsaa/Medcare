@@ -1,30 +1,46 @@
+<header class="head" >
+  <div class="header">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <div class="header-logo">
+      <img class="logo" src="../../assets/Vector.svg" alt="">
+    </div>
+  </div>
+</header>
 
-<ion-content [fullscreen]="true" style="text-align:center">
 
-	<div class="cont">
-    <div class="div-logo">
-      <img src="assets/Vector.svg" class="logo">
+<ion-content>
+  <div class="content">
+    <ion-text class="welcome">
+      <h1>Bienvenido <br>{{ nombre }}</h1>
+    </ion-text>
+
+    <div class="date">
+      <h1 class="dayName">
+        {{ today_nombre }}
+      </h1>
+      <h1 class="dayNumber">
+        {{ today_numero }}
+      </h1>
     </div>
 
-    <div class="div-nombre">
-      <ion-text>
-        <h1 class="nombre-titulo" style="font-size:40px">MedCare</h1>
-      </ion-text>
+    <div class="meds">Receta
+      <ion-card class="medCard">
+        <ion-card-header>
+          <ion-card-title> {{ remedio }} </ion-card-title>
+        </ion-card-header>
+        <ion-card-content mode="ios"> {{ dosis }} </ion-card-content>
+      </ion-card>
     </div>
 
-    <ion-item class="form-login" color="light">
-      <ion-label position="floating">RUT</ion-label>
-      <ion-input [(ngModel)]="rut"></ion-input>
-    </ion-item>
-
-    <ion-item class="form-login" color="light">
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" [(ngModel)]="pass"></ion-input>
-    </ion-item>
-
-    <div>
-      <ion-button (click)="logear()" class="btn-login"  shape="round" size="default" color="tertiary">Entrar</ion-button>
+    <div class="buttons">
+      <ion-button class="button-start" shape="round" size="default" (click)="toReserve()" color="tertiary"><ion-icon slot="start" name="calendar-number-outline" > </ion-icon> Tomar horas <br> médicas</ion-button>
+      <ion-button class="button-start" shape="round" size="default" (click)="toAlarm()" color="tertiary"><ion-icon slot="start" name="alarm-outline"></ion-icon> Alarmas</ion-button>
     </div>
+  </div>
 
-</div>
 </ion-content>
+
+
+

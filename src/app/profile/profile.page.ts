@@ -5,11 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage{
+
+nombredoctor = 'Sigmun Froid';
 
   constructor() { }
 
-  ngOnInit() {
-  }
 
 }

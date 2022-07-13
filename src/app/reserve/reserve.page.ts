@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MyModalPage } from '../my-modal/my-modal.page';
+import { ReserveModalPage } from '../reserve-modal/reserve-modal.page';
 import { ModalController } from '@ionic/angular';
 import { format, parseISO  } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { DatePipe } from '@angular/common';
-import { pipe } from 'rxjs';
+import { Storage } from '@capacitor/storage';
 
 
 @Component({
@@ -12,39 +11,44 @@ import { pipe } from 'rxjs';
   templateUrl: './reserve.page.html',
   styleUrls: ['./reserve.page.scss'],
 })
-export class ReservePage implements OnInit {
+export class ReservePage{
 
-  dateValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
-  dateFormattedString = '';
+  storage = Storage;
+  fecha = '';
+  horaMedica = '';
   minDate: string = new Date().toISOString();
   selectedDate: string = new Date().toISOString();
 
-  constructor(private modalCtrl: ModalController) {
-
-   }
-
-  ngOnInit() {
-  }
+  constructor(private modalCtrl: ModalController) { this.horaTomada() }
 
   async openModal(){
     const modal = await this.modalCtrl.create({
-      component: MyModalPage,
+      component: ReserveModalPage,
       cssClass: 'popup-modal'
     });
 
     await modal.present();
   }
 
-//desactiva fin de semana
-  isWeekday = (dateString: string) => {
+  //Método que desactica el día 0 (Domingo) del calendario
+  notSunday = (dateString: string) => {
     const date = new Date(dateString);
     const utcDay = date.getUTCDay();
     return utcDay !== 0;
-  };
+  }
 
-  dateSelected(value) {
-    this.dateFormattedString = format(parseISO(value), 'MMM d, yyyy', {locale: es});
-    //this.formattedString = value;
+  //Método que trae la hora tomada en el reserve-modal
+  async horaTomada(){
+    await this.storage.get({key: 'horaMedica'}).then(data =>{
+      this.horaMedica = data.value;
+    })
+  }
+
+  //Método que guarda en una variable el mes, día y año seleccionado en el calendario
+  //Luego abre reserve-page para seleccionar la hora
+  async dateSelected(value) {
+    this.fecha = format(parseISO(value), 'dd MMM, yyyy', {locale: es});
+    await this.storage.set({key: 'fechaTemporal', value: this.fecha})
     this.openModal();
   }
 

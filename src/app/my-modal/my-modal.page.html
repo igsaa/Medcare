@@ -1,7 +1,0 @@
-<ion-content >
-  <h4>Seleccione hora</h4>
-  <ion-datetime presentation="time" hour-cycle="h23" [hourValues]="hourValues" [min]="minTime" [max]="maxTime"
-  #time (ionChange)="timeSelected(time.value)"></ion-datetime>
-  <ion-button color="secondary" (click)="dismiss()" >Volver </ion-button>
-  <ion-button color="secondary">Continuar {{ timeFormattedString }}</ion-button>
-</ion-content>

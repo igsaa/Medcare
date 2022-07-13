@@ -1,83 +1,78 @@
 import { Component } from '@angular/core';
-import { MenuController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ReserveModalPage } from '../reserve-modal/reserve-modal.page';
+import { ModalController } from '@ionic/angular';
 import { DbService } from '../services/db.service';
+import { Storage } from '@capacitor/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
+export class HomePage{
+  storage = Storage;
+  array_usuario: any = [];
+  nombre: any;
+  remedio: any;
+  dosis: any;
+  date: Date = new Date();
+  today_nombre: any;
+  today_numero: any;
 
-export class HomePage {
-  public rut: string = '';
-  public pass: string = '';
-  listData = [];
-
-  constructor(public toastController: ToastController, private router: Router, private dbservice: DbService, private menuCtrl: MenuController) {
+  constructor(private dbservice: DbService, private modalCtrl: ModalController, private router: Router) {
+    try{
+      this.llenarDatos()
+      this.llenarDia(this.date)
+    }
+    catch(e){
+        console.log("TRY CATCH DEL START PAGE: " + e)
+    }
   }
 
-  ionViewWillEnter(){
-    this.menuCtrl.enable(false);
-  }
-
-  ionViewDidLeave() {
-    this.menuCtrl.enable(true);
-  }
-
-  async failAuth() {
-    const toast = await this.toastController.create({
-      message: 'Usuario y/o Contraseña Incorrectos',
-      duration: 2000,
-      color: 'danger',
-      position: 'top',
-      cssClass: 'toast-crear',
-      icon: 'alert-circle-outline'
+  async openModal(){
+    const modal = await this.modalCtrl.create({
+      component: ReserveModalPage,
+      cssClass: 'popup-modal'
     });
-    toast.present();
-  }
-
-  async emptyToast() {
-    const toast = await this.toastController.create({
-      message: 'Datos Faltantes',
-      duration: 2000,
-      color: 'danger',
-      position: 'top',
-      cssClass: 'toast-crear',
-      icon: 'alert-circle-outline'
-    });
-    toast.present();
+    await modal.present();
   }
   
-  async successToast() {
-    const toast = await this.toastController.create({
-      message: 'Sesion iniciada',
-      duration: 2000,
-      color: 'success',
-      position: 'top',
-      cssClass: 'toast-crear',
-      icon: 'checkmark-circle-outline'
-    });
-    toast.present();
-    this.router.navigateByUrl('/start', { replaceUrl: true });
+  llenarDia(date: Date){
+    this.today_numero = date.getDate()
+    if(date.getDay() == 1){
+      this.today_nombre = "Lunes"
+    }else if(date.getDay() == 2){
+      this.today_nombre = "Martes"
+    }else if(date.getDay() == 3){
+      this.today_nombre = "Miercoles"
+    }else if(date.getDay() == 4){
+      this.today_nombre = "Jueves"
+    }else if(date.getDay() == 5){
+      this.today_nombre = "Viernes"
+    }else if(date.getDay() == 6){
+      this.today_nombre = "Sabado"
+    }else{
+      this.today_nombre = "Domingo"
+    }
+  } 
+
+  async llenarDatos(){
+      this.array_usuario = [];
+      await this.storage.get({key: 'usuario'}).then((array) => {this.array_usuario = JSON.parse(array.value)})
+      .then(() => {
+        this.nombre = this.array_usuario.map(usuario => usuario.nombre)
+        this.remedio = this.array_usuario.map(usuario => usuario.remedio)
+        this.dosis = this.array_usuario.map(usuario => usuario.dosis)
+      })
   }
 
-  logear(){
-    if (this.rut === '' || this.pass === ''){
-      this.emptyToast();
-    }
-    else{
-      this.dbservice.consultarDatosLogin(this.rut, this.pass, this.dbservice.dbObject)
-    .then((data) => {
-      if(data){
-        this.dbservice.guardarDatos(this.rut).then(() => {
-          this.successToast();
-        })
-      }      
-      else{
-        this.failAuth();
-      }
-    })
-    } 
+  toReserve(){
+    this.router.navigate(['/reserve'], { replaceUrl: true });
   }
+
+  toAlarm(){
+    this.router.navigate(['/alarm'], { replaceUrl: true });
+  }
+
 }

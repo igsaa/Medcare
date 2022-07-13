@@ -4,19 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { StartPageRoutingModule } from './start-routing.module';
+import { ReserveModalPageRoutingModule } from './reserve-modal-routing.module';
 
-import { StartPage } from './start.page';
-import { HomePageModule } from '../home/home.module';
+import { ReserveModalPage } from './reserve-modal.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StartPageRoutingModule,
-    HomePageModule
+    ReserveModalPageRoutingModule
   ],
-  declarations: [StartPage]
+  declarations: [ReserveModalPage]
 })
-export class StartPageModule {}
+export class ReserveModalPageModule {}
