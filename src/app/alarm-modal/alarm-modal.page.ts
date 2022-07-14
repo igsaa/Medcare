@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { format,parseISO } from 'date-fns';
-import { Router } from '@angular/router';
 import { Storage } from '@capacitor/storage';
 
 @Component({
@@ -9,46 +8,42 @@ import { Storage } from '@capacitor/storage';
   templateUrl: './alarm-modal.page.html',
   styleUrls: ['./alarm-modal.page.scss'],
 })
-export class AlarmModalPage implements OnInit {
-  timeFormattedString= 'testing';
-  alarma: any = [];
+export class AlarmModalPage{
+  horaSeleccionada = '';
+  array_alarmas: any = [];
   storage = Storage;
   index:any;
 
-  constructor(private modalCtrl: ModalController, private router: Router) {
+  constructor(private modalCtrl: ModalController) {}
+
+  //Método para retornar a la página anterior (/alarm)
+  async dismiss(){
+    window.location.reload();
+    await this.modalCtrl.dismiss();
   }
 
-  ngOnInit() {
-    this.llenarAlarma();
+  //Método que guarda la array de alarmas en el Storage para su uso futuro
+  async guardarAlarma(){
+    await this.storage.get({key: 'alarma_array'}).then((array) => {this.array_alarmas = JSON.parse(array.value)})
+    await this.storage.remove({key: 'alarma_array'})
+    this.array_alarmas.push(this.horaSeleccionada)
+    await this.storage.set({key: 'alarma_array', value: JSON.stringify(this.array_alarmas)})
   }
 
-  dismiss(){
-    this.modalCtrl.dismiss();
+  //Método que guarda la hora en formato 'HH:mm' en una variable para luego almacenarla
+  timeSelected(date){
+    this.horaSeleccionada = format(parseISO(date), 'HH:mm');
   }
 
-
-  async llenarAlarma(){
-    await this.storage.get({key: 'alarma'}).then((array) => {
-      if(array.value.length>0){
-        this.alarma = JSON.parse(array.value)
-      }
-    })
-    console.log('alarma: ' + this.alarma);
+  //Método que se ejecuta al apretar el botón aceptar
+  //De no seleccionar una hora, emite una alerta para informar al usuario que debe escoger una
+  async btnAceptar(value){
+    if(!value){
+      alert("Porfavor seleccione una hora")
+    }else{
+    this.timeSelected(value);
+    await this.guardarAlarma();
+    this.dismiss();
+    }
   }
-
-  async setAlarma(hora){
-    await this.storage.set({key: 'alarma', value: JSON.stringify(hora)})
-  }
-
-  async deleteAlarm(){
-    await this.storage.remove({key:'alarma'});
-  }
-
-  timeSelected(value){
-    this.timeFormattedString = format(parseISO(value), 'HH:mm');
-    this.alarma.push({hora: this.timeFormattedString.split(':')[0], minutos: this.timeFormattedString.split(':')[1]});
-    console.log('Hora ' + this.alarma[0].hora + ':' +this.alarma[0].minutos);
-    this.setAlarma(this.alarma);
-  }
-
 }

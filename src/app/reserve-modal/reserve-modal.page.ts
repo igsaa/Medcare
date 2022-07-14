@@ -11,6 +11,8 @@ import { Storage } from '@capacitor/storage';
 export class ReserveModalPage{
   
   storage = Storage;
+  hora_medica = '';
+  array_horas_medicas: any = [];
   horaSeleccionada = '';
   fechaSeleccionada = '';
   hourValues = ['08','09','10','11','12','13','14','15','16','17','18'];
@@ -20,8 +22,9 @@ export class ReserveModalPage{
 
   //Método para retornar a la página anterior (/reserve)
   async dismiss(){
-    this.modalCtrl.dismiss();
     await this.storage.remove({key:'fechaTemporal'})
+    window.location.reload();
+    await this.modalCtrl.dismiss();
   }
 
   //Método que guarda la hora en formato 'HH:mm' en una variable para luego almacenarla
@@ -43,8 +46,12 @@ export class ReserveModalPage{
   } 
 
   //Método que trae la fecha seleccionada en la página anterior para luego almacenarla junto a la hora seleccionada
-  async guardarFechaHora(){
-    await this.storage.set({key: 'horaMedica', value: this.fechaSeleccionada + " - " + this.horaSeleccionada})
+  async guardarHoraMedica(){
+    this.hora_medica = this.fechaSeleccionada + " - " + this.horaSeleccionada
+    await this.storage.get({key: 'horaMedica_array'}).then((array) => {this.array_horas_medicas = JSON.parse(array.value)})
+    await this.storage.remove({key: 'horaMedica_array'})
+    this.array_horas_medicas.push(this.hora_medica)
+    await this.storage.set({key: 'horaMedica_array', value: JSON.stringify(this.array_horas_medicas)})
   }
 
   //Método que se ejecuta al apretar el botón aceptar
@@ -54,7 +61,7 @@ export class ReserveModalPage{
       alert("Porfavor seleccione una hora")
     }else{
     this.timeSelected(value);
-    this.guardarFechaHora();
+    await this.guardarHoraMedica();
     this.dismiss();
     }
   }

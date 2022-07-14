@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Storage } from '@capacitor/storage';
 import { DbService } from '../services/db.service';
 import { ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-data',
@@ -21,7 +20,7 @@ export class UserDataPage{
   direccion: string = "";
   validacion: boolean;
 
-  constructor(private dbservice: DbService, public toastController: ToastController, private router: Router) {
+  constructor(private dbservice: DbService, public toastController: ToastController) {
     try{
       this.llenarDatos()
     }
@@ -82,7 +81,6 @@ export class UserDataPage{
       icon: 'checkmark-circle-outline'
     });
     toast.present();
-    this.router.navigateByUrl('/user-data', { replaceUrl: true });
   }
 
   async datosFaltantes(message: string) {

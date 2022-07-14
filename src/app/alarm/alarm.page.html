@@ -16,17 +16,15 @@
     </div>
     <ion-list class="lista">
       <ion-item *ngFor="let item of alarma; let i=index">
-        <ion-button slot="end" fill="clear" shape="round" (click)="getIndex(i)">
+        <ion-button slot="end" fill="clear" shape="round" (click)="eliminarHoraMedica(i)">
           <ion-icon name="trash-outline" color="danger"></ion-icon>
         </ion-button>
-        {{item.hora}}:{{item.minutos}}
+        {{item}}
       </ion-item>
     </ion-list>
     <div class="add">
       <ion-fab vertical="end" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="openTime()">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
+        <ion-fab-button (click)="openModal()"><ion-icon name="add"></ion-icon></ion-fab-button>
       </ion-fab>
     </div>
     <div class="activar">

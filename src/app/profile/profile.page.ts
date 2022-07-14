@@ -46,6 +46,6 @@ export class ProfilePage{
       this.nombre_doctor = this.array_doctor.map(doctor => doctor.nombre)
       this.especialidad_doctor = this.array_doctor.map(doctor => doctor.especialidad)
     })
-}
+  }
 
 }

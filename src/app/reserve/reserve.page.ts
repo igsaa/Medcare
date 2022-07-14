@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReserveModalPage } from '../reserve-modal/reserve-modal.page';
 import { ModalController } from '@ionic/angular';
-import { format, parseISO  } from 'date-fns';
+import { format, isThisMinute, parseISO  } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Storage } from '@capacitor/storage';
 
@@ -14,13 +14,18 @@ import { Storage } from '@capacitor/storage';
 export class ReservePage{
 
   storage = Storage;
+  array_horas_medicas: any = [];
   fecha = '';
+  index: any;
   horaMedica = '';
   minDate: string = new Date().toISOString();
   selectedDate: string = new Date().toISOString();
 
-  constructor(private modalCtrl: ModalController) { this.horaTomada() }
+  constructor(private modalCtrl: ModalController) { 
+    this.asignarHorasMedicas()
+   }
 
+  //Método que abre el modal "reserve-modal"
   async openModal(){
     const modal = await this.modalCtrl.create({
       component: ReserveModalPage,
@@ -37,11 +42,24 @@ export class ReservePage{
     return utcDay !== 0;
   }
 
-  //Método que trae la hora tomada en el reserve-modal
-  async horaTomada(){
-    await this.storage.get({key: 'horaMedica'}).then(data =>{
-      this.horaMedica = data.value;
+  //Método que retorna el índex del array de horas_medicas
+  setIndex(index){
+    this.index = index;
+  }
+
+  //Método para eliminar el index encontrado de la hora médica
+  async eliminarHoraMedica(index){
+    this.setIndex(index)
+    this.array_horas_medicas.splice(index, 1)
+    await this.storage.remove({key: 'horaMedica_array'})
+    await this.storage.set({key: 'horaMedica_array', value: JSON.stringify(this.array_horas_medicas)}).then(()=>{
+      alert("Hora médica borrada con éxito")
     })
+  }
+
+  //Método que asigna las horas médicas tomadas en la array para mostrarlas
+  async asignarHorasMedicas(){
+    await this.storage.get({key: 'horaMedica_array'}).then((array) => {this.array_horas_medicas = JSON.parse(array.value)})
   }
 
   //Método que guarda en una variable el mes, día y año seleccionado en el calendario

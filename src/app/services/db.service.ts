@@ -27,6 +27,9 @@ export class DbService {
         if(this.database_isReady != 'true'){
           this.sqlite = new SQLite();
           await this.setDatabase().then(async ()=>{
+            let array: any = [];
+            await this.storage.set({key: 'horaMedica_array', value: JSON.stringify(array)}) //Crea un storage de array de horas médicas para el evitar errores
+            await this.storage.set({key: 'alarma_array', value: JSON.stringify(array)}) //Crea un storage de array de alarmas para el evitar errores
             await this.createTables(this.dbObject, this.database.getCreateTableDoctor());
             await this.createTables(this.dbObject, this.database.getCreateTableUsuario());
             await this.insertIntos(this.dbObject, this.database.getInsertIntoDoctor());
