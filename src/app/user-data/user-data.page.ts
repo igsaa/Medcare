@@ -12,7 +12,7 @@ import { ToastController } from '@ionic/angular';
 export class UserDataPage{
   storage = Storage;
   emailReg =  /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  adressReg = /[A-Za-z0-9_\-\., ]+\ +[0-9]/;
+  adressReg = /[A-Za-z0-9_\-\.,'`" ]+\ +[0-9]/;
   array_usuarios: any = [];
   rut: string = "";
   telefono: string = "";
