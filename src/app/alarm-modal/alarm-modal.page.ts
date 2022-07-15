@@ -13,6 +13,7 @@ export class AlarmModalPage{
   array_alarmas: any = [];
   storage = Storage;
   index:any;
+  estado: any =[];
 
   constructor(private modalCtrl: ModalController) {}
 
@@ -28,6 +29,14 @@ export class AlarmModalPage{
     await this.storage.remove({key: 'alarma_array'})
     this.array_alarmas.push(this.horaSeleccionada)
     await this.storage.set({key: 'alarma_array', value: JSON.stringify(this.array_alarmas)})
+    await this.storage.get({key: 'estado'}).then((data) => {
+      if(data.value!=null){
+        this.estado = JSON.parse(data.value)
+      }
+    })
+    await this.storage.remove({key: 'estado'})
+    this.estado.push(false)
+    await this.storage.set({key: 'estado', value: JSON.stringify(this.estado)})
   }
 
   //Método que guarda la hora en formato 'HH:mm' en una variable para luego almacenarla

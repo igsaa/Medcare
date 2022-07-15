@@ -16,10 +16,11 @@
     </div>
     <ion-list class="lista">
       <ion-item *ngFor="let item of alarma; let i=index">
-        <ion-button slot="end" fill="clear" shape="round" (click)="eliminarHoraMedica(i)">
+        <ion-button slot="end" fill="clear" shape="round" (click)="eliminarAlarma(i)">
           <ion-icon name="trash-outline" color="danger"></ion-icon>
         </ion-button>
         {{item}}
+        <ion-toggle [(ngModel)]="estado[i]" (ionChange)="notificationModel(i)"></ion-toggle>
       </ion-item>
     </ion-list>
     <div class="add">
@@ -28,7 +29,7 @@
       </ion-fab>
     </div>
     <div class="activar">
-      <ion-button (click)="notificationModel()" expand="block" fill="clear" shape="round">Activar</ion-button>
+      <ion-button (click)="notificationModelTest()" expand="block" fill="clear" shape="round">Activar</ion-button>
     </div>
   </div>
 </ion-content>
