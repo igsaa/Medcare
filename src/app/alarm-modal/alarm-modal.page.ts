@@ -18,7 +18,6 @@ export class AlarmModalPage{
 
   //Método para retornar a la página anterior (/alarm)
   async dismiss(){
-    window.location.reload();
     await this.modalCtrl.dismiss();
   }
 

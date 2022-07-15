@@ -12,7 +12,8 @@ import { ToastController } from '@ionic/angular';
 export class UserDataPage{
   storage = Storage;
   emailReg =  /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  adressReg = /[A-Za-z0-9_\-\.,'`" ]+\ +[0-9]/;
+  adressReg = /^([A-Za-zÀ-ÿ0-9_\-\.\,\'\`\"\u00f1\u00d1]{4,30})+\ ([0-9]{1,6})$/;
+  phoneReg = /^[0-9]*$/;
   array_usuarios: any = [];
   rut: string = "";
   telefono: string = "";
@@ -43,7 +44,7 @@ export class UserDataPage{
   async guardarDatos(){
     let datos_faltantes = "";
     this.validacion = true;
-      if(this.telefono.toString().length != 9){
+      if(!this.phoneReg.test(this.telefono.toString()) || this.telefono.toString().length != 9){
         this.validacion = false;
         datos_faltantes = "Telefono debe tener 9 dígitos (Ej: 123456789)<br/>"
         this.datosFaltantes(datos_faltantes)

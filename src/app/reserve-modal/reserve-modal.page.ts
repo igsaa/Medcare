@@ -23,7 +23,6 @@ export class ReserveModalPage{
   //Método para retornar a la página anterior (/reserve)
   async dismiss(){
     await this.storage.remove({key:'fechaTemporal'})
-    window.location.reload();
     await this.modalCtrl.dismiss();
   }
 
