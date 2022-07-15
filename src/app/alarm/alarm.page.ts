@@ -18,9 +18,7 @@ export class AlarmPage{
   index: any;
   estado: any = [];
 
-  constructor(private modalCtrl: ModalController, private alert: AlertController) {
-    this.llenarAlarma();
-  }
+  constructor(private modalCtrl: ModalController, private alert: AlertController) { this.llenarAlarma(); }
 
   //Método que abre el modal "alarm-modal"
   async openModal(){
@@ -28,7 +26,9 @@ export class AlarmPage{
       component: AlarmModalPage,
       cssClass: 'popupTime-modal'
     });
-
+    modal.onDidDismiss().then(() => {
+      this.llenarAlarma();
+    });
     await modal.present();
   }
 
@@ -47,15 +47,9 @@ export class AlarmPage{
     await LocalNotifications.checkPermissions();
   }
 
-  //Método que retorna el índex del array de alarmas
-  setIndex(index){
-    this.index = index;
-    console.log('indice: '+this.index)
-  }
-
   //Método para eliminar el index encontrado de la alarma
   async eliminarAlarma(index){
-    this.setIndex(index)
+    this.index = index;
     this.alarma.splice(index,1)
     await this.storage.remove({key: 'alarma_array'})
     await this.storage.set({key: 'alarma_array', value: JSON.stringify(this.alarma)}).then(()=>{

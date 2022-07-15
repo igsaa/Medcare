@@ -23,7 +23,7 @@ export class ReserveModalPage{
   //Método para retornar a la página anterior (/reserve)
   async dismiss(){
     await this.storage.remove({key:'fechaTemporal'})
-    await this.modalCtrl.dismiss();
+    await this.modalCtrl.dismiss(/*this.horaSeleccionada*/);
   }
 
   //Método que guarda la hora en formato 'HH:mm' en una variable para luego almacenarla

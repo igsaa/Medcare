@@ -21,9 +21,7 @@ export class ReservePage{
   minDate: string = new Date().toISOString();
   selectedDate: string = new Date().toISOString();
 
-  constructor(private modalCtrl: ModalController) { 
-    this.asignarHorasMedicas()
-   }
+  constructor(private modalCtrl: ModalController) { this.asignarHorasMedicas() }
 
   //Método que abre el modal "reserve-modal"
   async openModal(){
@@ -31,7 +29,10 @@ export class ReservePage{
       component: ReserveModalPage,
       cssClass: 'popup-modal'
     });
-
+    modal.onDidDismiss().then((/*data*/) => {
+      this.asignarHorasMedicas();
+      //console.log("\nesta es la data: " + data['data'])
+    });
     await modal.present();
   }
 
@@ -42,14 +43,9 @@ export class ReservePage{
     return utcDay !== 0;
   }
 
-  //Método que retorna el índex del array de horas_medicas
-  setIndex(index){
-    this.index = index;
-  }
-
   //Método para eliminar el index encontrado de la hora médica
   async eliminarHoraMedica(index){
-    this.setIndex(index)
+    this.index = index;
     this.array_horas_medicas.splice(index, 1)
     await this.storage.remove({key: 'horaMedica_array'})
     await this.storage.set({key: 'horaMedica_array', value: JSON.stringify(this.array_horas_medicas)}).then(()=>{
