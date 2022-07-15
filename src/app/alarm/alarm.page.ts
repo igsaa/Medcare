@@ -4,7 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { AlarmModalPage } from '../alarm-modal/alarm-modal.page'; 
 import { Storage } from '@capacitor/storage';
 import { AlertController } from '@ionic/angular';
-import { id } from 'date-fns/locale';
 
 @Component({
   selector: 'app-alarm',
@@ -45,7 +44,7 @@ export class AlarmPage{
         this.estado = JSON.parse(array.value)
       }
     })
-    console.log('estado: '+this.estado[0])
+    await LocalNotifications.checkPermissions();
   }
 
   //Método que retorna el índex del array de alarmas
@@ -62,7 +61,11 @@ export class AlarmPage{
     await this.storage.set({key: 'alarma_array', value: JSON.stringify(this.alarma)}).then(()=>{
       alert("Alarma borrada con éxito")
     })
-    this.alarma.splice(index,1)
+    console.log('estado: ' +this.estado[index])
+    if(this.estado[index]){
+      this.estado.splice(index,1,false)
+    }
+    this.estado.splice(index,1)
     await this.storage.remove({key: 'estado'})
     await this.storage.set({key: 'estado', value: JSON.stringify(this.estado)})
   }

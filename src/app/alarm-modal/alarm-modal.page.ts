@@ -13,7 +13,7 @@ export class AlarmModalPage{
   array_alarmas: any = [];
   storage = Storage;
   index:any;
-  estado: any =[];
+  estado: any = [];
 
   constructor(private modalCtrl: ModalController) {}
 
