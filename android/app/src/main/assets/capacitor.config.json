@@ -3,7 +3,9 @@
 	"appName": "MedCare",
 	"webDir": "www",
 	"bundledWebRuntime": false,
-	"server": {
-		"url": "http://192.168.100.3:8100"
+	"plugins": {
+		"LocalNotifications": {
+			"sound": "alarma_molesta.wav"
+		}
 	}
 }

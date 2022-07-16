@@ -1,11 +1,4 @@
 <header>
-  <ion-toolbar>
-    <div class="close">
-      <ion-button class="close-button" (click)="dismiss()" fill="clear" color="light" color="tertiary">
-        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
-      </ion-button>
-    </div>
-  </ion-toolbar>
 </header>
 
 <ion-content [fullscreen]="true">
@@ -13,7 +6,7 @@
     <ion-datetime presentation="time" hour-cycle="h23" #time></ion-datetime>
   </div>
   <div class="buttons">
-    <ion-button (click)="dismiss()">Cancelar</ion-button>
+    <ion-button (click)="dismissCancelar()">Cancelar</ion-button>
     <ion-button (click)="btnAceptar(time.value)">Aceptar</ion-button>
   </div>
 </ion-content>

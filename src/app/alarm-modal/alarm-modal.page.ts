@@ -17,25 +17,14 @@ export class AlarmModalPage{
 
   constructor(private modalCtrl: ModalController) {}
 
-  //Método para retornar a la página anterior (/alarm)
-  async dismiss(){
-    await this.modalCtrl.dismiss();
+  //Método para retornar a la página anterior (/alarm) al aceptar
+  async dismissAceptar(){
+    await this.modalCtrl.dismiss(this.horaSeleccionada);
   }
 
-  //Método que guarda la array de alarmas en el Storage para su uso futuro
-  async guardarAlarma(){
-    await this.storage.get({key: 'alarma_array'}).then((array) => {this.array_alarmas = JSON.parse(array.value)})
-    await this.storage.remove({key: 'alarma_array'})
-    this.array_alarmas.push(this.horaSeleccionada)
-    await this.storage.set({key: 'alarma_array', value: JSON.stringify(this.array_alarmas)})
-    await this.storage.get({key: 'estado'}).then((data) => {
-      if(data.value!=null){
-        this.estado = JSON.parse(data.value)
-      }
-    })
-    await this.storage.remove({key: 'estado'})
-    this.estado.push(false)
-    await this.storage.set({key: 'estado', value: JSON.stringify(this.estado)})
+  //Método para retornar a la página anterior (/alarm) al cancelar
+  async dismissCancelar(){
+    await this.modalCtrl.dismiss();
   }
 
   //Método que guarda la hora en formato 'HH:mm' en una variable para luego almacenarla
@@ -50,8 +39,7 @@ export class AlarmModalPage{
       alert("Porfavor seleccione una hora")
     }else{
     this.timeSelected(value);
-    await this.guardarAlarma();
-    this.dismiss();
+    this.dismissAceptar();
     }
   }
 }
