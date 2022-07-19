@@ -19,6 +19,9 @@ export class AppComponent {
     await this.storage.remove({key:'horaMedica_array'})
     await this.storage.remove({key:'alarma_array'})
     await this.storage.remove({key:'estado_array'})
+    await this.storage.set({key: 'horaMedica_array', value: JSON.stringify([])}) //Se setea la array en storage para evitar errores
+    await this.storage.set({key: 'alarma_array', value: JSON.stringify([])}) //Se setea la array en storage para evitar errores
+    await this.storage.set({key: 'estado_array', value: JSON.stringify([])}) //Se setea la array en storage para evitar errores
     .then(() => {
       console.log("\nDatos borrados con éxito")
       this.router.navigateByUrl('/login', { replaceUrl: true })
